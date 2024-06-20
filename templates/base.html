@@ -65,16 +65,17 @@
                             <div class="collapse navbar-collapse" id="navbarsExample04">
                                 <ul class="navbar-nav mr-auto">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="home.html"> Home </a>
+                                        <a class="nav-link" href="{{ url_for('home') }}">Home</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="partidos.html">INFO</a>
+                                        <a class="nav-link" href="{{ url_for('partidos') }}">INFO</a>
                                     </li>
                                     <li class="nav-item active">
-                                        <a class="nav-link" href="prueba.html">Contacto</a>
+                                        <a class="nav-link" href="{{ url_for('contacto') }}">Contacto</a>
                                     </li>
                                 </ul>
                             </div>
+                            
                         </nav>
                     </div>
                 </div>
