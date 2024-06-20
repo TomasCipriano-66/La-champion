@@ -1,0 +1,203 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<!-- loader  -->
+<div class="loader_bg">
+    <div class="loader"><img src="static/images/loading.gif" alt="#" /></div>
+</div>
+<!-- end loader -->
+
+<!-- banner -->
+<section class="banner_main">
+    <div id="myCarousel" class="carousel slide banner" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img class="first-slide" src="static/images/banner.jpg" alt="First slide">
+                <div class="container">
+                    <div class="carousel-caption relative">
+                        <h1>La mejor <br>Información<br>del Futbol</h1>
+                        <p>Todo sobre tu club favorito <br>noticias, comentarios y resultados<br>futbol local e
+                            internacional
+                        </p>
+                        <a href="#">Leer Más</a>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img class="second-slide" src="static/images/banner.jpg" alt="Second slide">
+                <div class="container">
+                    <div class="carousel-caption relative">
+                        <h1>La mejor <br>Información<br>del Futbol</h1>
+                        <p>Todo sobre tu club favorito <br>noticias, comentarios y resultados<br>futbol local e
+                            internacional
+                        </p>
+                        <a href="#">Leer Más</a>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img class="third-slide" src="static/images/banner3.jpg" alt="Third slide">
+                <div class="container">
+                    <div class="carousel-caption relative">
+                        <h1>La mejor <br>Información<br>del Futbol</h1>
+                        <p>Todo sobre tu club favorito <br>noticias, comentarios y resultados<br>futbol local e
+                            internacional
+                        </p>
+                        <a href="#">Leer Más</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+</section>
+<!-- end banner -->
+
+<!-- our -->
+<div class="our">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="titlepage">
+                    <h2>La mejor Información del Futbol</h2>
+                    <p>Todo sobre tu club favorito: noticias, comentarios y resultados de futbol local e internacional.
+                    </p>
+                    <a class="read_more" href="#">Leer Más</a>
+                </div>
+            </div>
+            <div class="col-md-7">
+                <div class="our_img">
+                    <figure><img src="static/images/our.png" alt="#" /></figure>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end our -->
+
+<!-- upcoming -->
+<div class="upcoming">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="titlepage">
+                    <h2>Partidos Próximos</h2>
+                </div>
+                <div class="upcoming_main">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-6">
+                            <div class="upcoming_box">
+                                <figure><img src="static/images/up1.jpg" alt="#" />
+                                </figure>
+                                <div class="date">
+                                    <h3>25<br>Sept</h3>
+                                </div>
+                                <div class="upcoming_box_text">
+                                    <h4>Partido 1</h4>
+                                    <p>Descripción del partido 1.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="upcoming_box">
+                                <figure><img src="static/images/up2.jpg" alt="#" />
+                                </figure>
+                                <div class="date">
+                                    <h3>28<br>Sept</h3>
+                                </div>
+                                <div class="upcoming_box_text">
+                                    <h4>Partido 2</h4>
+                                    <p>Descripción del partido 2.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="upcoming_box">
+                                <figure><img src="static/images/up3.jpg" alt="#" />
+                                </figure>
+                                <div class="date">
+                                    <h3>30<br>Sept</h3>
+                                </div>
+                                <div class="upcoming_box_text">
+                                    <h4>Partido 3</h4>
+                                    <p>Descripción del partido 3.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="read_more" href="#">Ver Más</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end upcoming -->
+
+<!-- our brand -->
+<div class="brand">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="titlepage">
+                    <h2>Nuestros Patrocinadores</h2>
+                </div>
+                <div class="brand_bg">
+                    <div class="row">
+                        <div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6">
+                            <div class="brand_box">
+                                <figure><img src="static/images/brand1.png" alt="#" />
+                                </figure>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6">
+                            <div class="brand_box">
+                                <figure><img src="static/images/brand2.png" alt="#" />
+                                </figure>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6">
+                            <div class="brand_box">
+                                <figure><img src="static/images/brand3.png" alt="#" />
+                                </figure>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6">
+                            <div class="brand_box">
+                                <figure><img src="static/images/brand4.png" alt="#" />
+                                </figure>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6">
+                            <div class="brand_box">
+                                <figure><img src="static/images/brand5.png" alt="#" />
+                                </figure>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6">
+                            <div class="brand_box">
+                                <figure><img src="static/images/brand6.png" alt="#" />
+                                </figure>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end our brand -->
+{% endblock %}
