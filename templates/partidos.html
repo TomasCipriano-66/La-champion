@@ -13,9 +13,9 @@ Título de la página de inicio
 
       <!-- Buttons -->
       <div class="buttons_categories">
-         <button onclick="mostrarPodio('opcion1')" class="active" >Futbol</button>
-         <button onclick="mostrarPodio('opcion2')">Basquet</button>
-         <button onclick="mostrarPodio('opcion3')">Voley</button>
+         <button onclick="mostrarPodio('opcion1')" class="active">Futbol ⚽</button>
+         <button onclick="mostrarPodio('opcion2')">Basquet 🏀</button>
+         <button onclick="mostrarPodio('opcion3')">Voley 🏐</button>
       </div>
       <hr>
       <!-- Podio -->
@@ -57,12 +57,36 @@ Título de la página de inicio
    </div>
 
    <h2 class="title_map">MAPA DEL INSTITUTO</h2>
-   <i><img src="static/images/instituto.png" alt="#" style="margin-left: 100px; margin-top: 30px;"/>
+   <div class="container">
+      <img src="static/images/instituto.png" class="mapa"/>
+      <div class="menu">
+         <div class="title_fixture">
+            <h1>Consulte los horarios de los partidos</h1>
+         </div>
+         <h1>Fixture Futbol</h1>
+         <div class="buttons">
+            <a href="static/recursos/FIXTURE.pdf" target="_blank" class="button view">Ver PDF</a>
+            <a href="static/recursos/FIXTURE.pdf" download class="button download">Descargar PDF</a>
+         </div>
+         <hr>
+         <h1>Fixture Basquet</h1>
+         <div class="buttons">
+            <a href="static/recursos/FIXTURE.pdf" target="_blank" class="button view">Ver PDF</a>
+            <a href="static/recursos/FIXTURE.pdf" download class="button download">Descargar PDF</a>
+         </div>
+         <hr>
+         <h1>Fixture Voley</h1>
+         <div class="buttons">
+            <a href="static/recursos/FIXTURE.pdf" target="_blank" class="button view">Ver PDF</a>
+            <a href="static/recursos/FIXTURE.pdf" download class="button download">Descargar PDF</a>
+         </div>
+      </div>
+   </div>
+
 
 </div>
-</div>
 
-   <!-- extra script -->
-   <script src="static/js/script.js"></script>
+<!-- extra script -->
+<script src="static/js/script.js"></script>
 <!-- end choose  section -->
 {% endblock %}
