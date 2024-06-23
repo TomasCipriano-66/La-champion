@@ -5,6 +5,7 @@
 @import url("https://fonts.googleapis.com/css?family=Rajdhani:300,400,500,600,700");
 @import url("https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i");
 @import url("https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,700");
 
 /*****---------------------------------------- 1) font-family: 'Rajdhani', sans-serif;
  2) font-family: 'Poppins', sans-serif;
@@ -552,24 +553,12 @@ ul.btn li:last-child {
 /** choose  section **/
 
 .choose {
-    margin-top: 90px;
     background-color: #242323;
     padding: 90px 0 190px 0;
     position: relative;
 }
 
-.choose::after {
-    position: absolute;
-    content: "";
-    bottom: 0;
-    left: 0px;
-    width: 100%;
-    height: 195px;
-    background: url(../images/choose_bottom_cross.png);
-    background-repeat: no-repeat;
-    display: block;
-    background-position: center center;
-}
+
 
 .choose .titlepage {
     text-align: left;
@@ -584,7 +573,6 @@ ul.btn li:last-child {
     color: #fff;
     display: block;
     font-size: 17px;
-    padding-top: 20px;
     line-height: 32px;
 }
 
@@ -1009,32 +997,168 @@ ul.link li a::after {
 }
 
 #decorated-button {
-     width: 80%;
-     height: 120px;
-     background-color: #f4cb1e; /* Verde */
-     color: white;
-     border: none;
-     border-radius: 12px; /* Bordes redondeados */
-     font-size: 66px; /* Tamaño de la fuente */
-     font-weight: bold;
-     cursor: pointer;
-     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* Sombra */
-     transition: 0.3s; /* Transición suave */
-     margin-left: 10%;
-     margin-top: 20px;
-     display: flex; /* Alinear el contenido */
-     align-items: center; /* Centrar verticalmente */
-     justify-content: center; /* Centrar horizontalmente */
- }
- 
- #decorated-button:hover {
-     background-color: #65f41e; /* Verde más oscuro al pasar el mouse */
-     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2); /* Sombra más intensa */
- }
- 
- #decorated-button:active {
-     background-color: #3aae00; /* Verde aún más oscuro al hacer clic */
-     box-shadow: 0 5px #666; /* Sombra al hacer clic */
-     transform: translateY(4px); /* Movimiento hacia abajo al hacer clic */
- }
- 
+    width: 80%;
+    height: 120px;
+    background-color: #f4cb1e; /* Verde */
+    color: white;
+    border: none;
+    border-radius: 12px; /* Bordes redondeados */
+    font-size: 66px; /* Tamaño de la fuente */
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* Sombra */
+    transition: 0.3s; /* Transición suave */
+    margin-left: 10%;
+    margin-top: 20px;
+    display: flex; /* Alinear el contenido */
+    align-items: center; /* Centrar verticalmente */
+    justify-content: center; /* Centrar horizontalmente */
+}
+
+#decorated-button:hover {
+    background-color: #65f41e; /* Verde más oscuro al pasar el mouse */
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2); /* Sombra más intensa */
+}
+
+#decorated-button:active {
+    background-color: #3aae00; /* Verde aún más oscuro al hacer clic */
+    box-shadow: 0 5px #666; /* Sombra al hacer clic */
+    transform: translateY(4px); /* Movimiento hacia abajo al hacer clic */
+}
+
+/* Card */
+.card {
+    display: block;
+    width: 80%;
+    margin: 50px auto; /* Centers the card horizontally */
+    background-color: #fbfbfb; /* White color */
+    padding: 50px;
+    border-radius: 5px;
+}
+
+/* Title */
+.title_podium {
+    text-align: center;
+
+    h1 {
+        color: #f5ce64; /* Yellow color */
+        font-size: 60px;
+        font-weight: 700;
+        margin-bottom: 0;
+    }
+}
+
+/* Ranking */
+.box {
+    display: block;
+    width: 80%;
+    height: 150px; /* SizeH */
+    margin: 20px auto;
+}
+
+/* Number */
+.number {
+    float: left;
+    font-weight: bold;
+    font-size: 50px;
+    width: 50px;
+    height: 150px; /* SizeH */
+    line-height: 150px; /* SizeH */
+    color: #dfe2e4; /* Gray color */
+    margin-right: 25px;
+    margin-left: 25px;
+}
+
+/* Cover */
+.cover {
+    float: left;
+    height: 150px; /* SizeH */
+    margin-right: 25px;
+    padding-top: 12px;
+
+    img {
+        height: 125px;
+        border-radius: 100%;
+    }
+}
+
+/* Name */
+.name {
+    float: left;
+    height: 150px; /* SizeH */
+    line-height: 150px; /* SizeH */
+    font-size: 30px;
+    font-weight: bold;
+    color: black;
+}
+
+
+
+/* Separator */
+.separator {
+    width: 80%;
+    height: 1px;
+    margin: auto;
+    background-color: #dfe2e4; /* Gray color */
+}
+
+/* :hover */
+.box:hover {
+    box-shadow: 1px 1px 40px 0px #dfe2e4; /* Gray color */
+
+    .number {
+        color: #f5ce64; /* Yellow color */
+    }
+
+    span {
+        color: #f5ce64; /* Yellow color */
+    }
+}
+
+
+.buttons_categories {
+    margin-top: 40px;
+    margin-bottom: 50px;
+    text-align: center;
+
+}
+
+.buttons_categories button {
+    margin: 0 12px;
+    padding: 10px 20px;
+    font-size: 25px;
+    background-color: #f5ce64;
+    color: white;
+    border: 2px solid #f5ce64;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    display: inline-block; /* Para que los botones se dimensionen según su contenido */
+}
+
+.buttons_categories button:hover {
+    background-color: #e7bf4f;
+    border-color: #e7bf4f;
+}
+
+.buttons_categories button.active {
+    background-color: #ffea47; /* Color de fondo cuando está activo */
+    border-color: #ffea47; /* Color del borde cuando está activo */
+    color: #434343;
+    font-weight: bold;
+}
+
+
+hr{
+    height: 3px;
+    background-color: #979797;
+    border-radius: 2px;
+}
+
+.title_map{
+    color: #fff;
+    padding-top: 100px;
+    margin-left: 200px;
+    font-size: 50px;
+    font-weight: bold;
+}

@@ -5,88 +5,64 @@ Título de la página de inicio
 {% endblock %}
 
 {% block content %}
-<!-- Aquí se coloca el contenido específico de la página de inicio -->
-<!-- choose  section -->
 <div class="choose ">
-   <div class="container">
-      <div class="row">
-         <div class="col-md-8">
-            <div class="titlepage">
-               <h2>Our Blog</h2>
-               <p>there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on
-                  the Internet tend to repeat predefined </p>
-            </div>
-         </div>
+   <div class="card">
+      <div class="title_podium">
+         <h1>PODIO COPA RENAULT</h1>
       </div>
-   </div>
-   <div class="container-fluid">
-      <div class="row d_flex">
-         <div class="col-xl-7 col-lg-7 col-md-12 col-sm-12">
-            <div class="padding_with">
-               <div class="row">
-                  <div class="col-md-6 padding_bottom">
-                     <div class="choose_box">
-                        <i><img src="static/images/icon1.png" alt="#" /></i>
-                        <div class="choose_text">
-                           <h3>Excellent Service</h3>
-                           <p>It is a long established fact that a reader will be distracted by the readable
-                              content
-                              of a</p>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-md-6 padding_bottom">
-                     <div class="choose_box">
-                        <i><img src="static/images/icon2.png" alt="#" /></i>
-                        <div class="choose_text">
-                           <h3>Clean Working</h3>
-                           <p>It is a long established fact that a reader will be distracted by the readable
-                              content
-                              of a</p>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-md-6 padding_bottom2">
-                     <div class="choose_box">
-                        <i><img src="static/images/icon3.png" alt="#" /></i>
-                        <div class="choose_text">
-                           <h3>Quality And Reliability</h3>
-                           <p>It is a long established fact that a reader will be distracted by the readable
-                              content
-                              of a</p>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-md-6">
-                     <div class="choose_box">
-                        <i><img src="static/images/icon4.png" alt="#" /></i>
-                        <div class="choose_text">
-                           <h3>Expert Farmer</h3>
-                           <p>It is a long established fact that a reader will be distracted by the readable
-                              content
-                              of a</p>
-                        </div>
-                     </div>
-                  </div>
-               </div>
 
-            </div>
+      <!-- Buttons -->
+      <div class="buttons_categories">
+         <button onclick="mostrarPodio('opcion1')" class="active" >Futbol</button>
+         <button onclick="mostrarPodio('opcion2')">Basquet</button>
+         <button onclick="mostrarPodio('opcion3')">Voley</button>
+      </div>
+      <hr>
+      <!-- Podio -->
+      <div id="podio">
+         <!-- Rancking -->
+         <div class="box"> <!-- #01 -->
+            <!-- Number -->
+            <div class="number">1</div>
+            <!-- Cover -->
+            <div class="cover"><img src="https://m.media-amazon.com/images/I/91-kmdlsEsL._SS500_.jpg" alt="01"></div>
+            <!-- Name -->
+            <div class="name"><span>Mi gente</span></div>
          </div>
-         <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12">
-            <div class="choose_img">
-               <figure><img src="static/images/food.jpg" alt="#" /></figure>
-            </div>
+
+         <!-- Separator -->
+         <div class="separator"></div>
+
+         <div class="box"> <!-- #02 -->
+            <!-- Number -->
+            <div class="number">2</div>
+            <!-- Cover -->
+            <div class="cover"><img src="http://bit.ly/2vlCeWf" alt="02"></div>
+            <!-- Name -->
+            <div class="name"><span>Feels</span></div>
+         </div>
+
+         <!-- Separator -->
+         <div class="separator"></div>
+
+         <div class="box"> <!-- #03 -->
+            <!-- Number -->
+            <div class="number">3</div>
+            <!-- Cover -->
+            <div class="cover"><img src="http://bit.ly/2vlRum1" alt="03"></div>
+            <!-- Name -->
+            <div class="name"><span>Attention</span></div>
          </div>
       </div>
    </div>
-   <div class="container">
-      <div class="row">
-         <div class="col-md-5">
-            <a class="read_more" href="#">Read More</a>
-         </div>
-      </div>
-   </div>
+
+   <h2 class="title_map">MAPA DEL INSTITUTO</h2>
+   <i><img src="static/images/instituto.png" alt="#" style="margin-left: 100px; margin-top: 30px;"/>
+
 </div>
 </div>
+
+   <!-- extra script -->
+   <script src="static/js/script.js"></script>
 <!-- end choose  section -->
 {% endblock %}

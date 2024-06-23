@@ -14,6 +14,10 @@ def partidos():
 def contacto():
     return render_template('contact.html')
 
+@app.route('/inscripcion')
+def inscripcion():
+    return render_template('inscripcion.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
 
