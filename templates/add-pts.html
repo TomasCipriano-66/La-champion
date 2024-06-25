@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <form action="/add/{{score.0}}" method="POST">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Asignador de puntos:</label><td>{{score.6}}</td>
+                        </div>
+                        <input type="int" class="form-control" name="SCORE" placeholder="SCORE" value="{{ score.6 }}">
+                        <button type="submit" class="btn btn-primary btn-block">Guardar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<form action="/update/{{team.0}}" method="POST">
+    <div class="form-group">
+        <label for="Equipo">Equipo</label>
+        <input type="text" class="form-control" id="Equipo" name="Equipo" placeholder="Equipo" value="{{ team.1 }}">
+    </div>
+    <div class="form-group">
+        <label for="Colegio">Colegio</label>
+        <input type="text" class="form-control" id="Colegio" name="Colegio" placeholder="Colegio" value="{{ team.2 }}">
+    </div>
+    <div class="form-group">
+        <label for="Deporte">Deporte</label>
+        <select class="form-control" id="Deporte" name="Deporte">
+            <option value="Futbol" {% if team.3=='Futbol' %}selected{% endif %}>Futbol</option>
+            <option value="Basquet" {% if team.3=='Basquet' %}selected{% endif %}>Basquet</option>
+            <option value="Voley" {% if team.3=='Voley' %}selected{% endif %}>Voley</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="Categoria">Categoría</label>
+        <select class="form-control" id="Categoria" name="Categoria">
+            <option value="Masculino mayor" {% if team.4=='Masculino mayor' %}selected{% endif %}>Masculino mayor
+            </option>
+            <option value="Masculino menor" {% if team.4=='Masculino menor' %}selected{% endif %}>Masculino menor
+            </option>
+            <option value="Femenino mayor" {% if team.4=='Femenino mayor' %}selected{% endif %}>Femenino mayor</option>
+            <option value="Femenino menor" {% if team.4=='Femenino menor' %}selected{% endif %}>Femenino menor</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="Telefono">Teléfono</label>
+        <input type="tel" class="form-control" id="Telefono" name="Telefono" placeholder="Teléfono"
+            value="{{ team.5 }}">
+    </div>
+    <button type="submit" class="btn btn-primary btn-block">Guardar</button>
+</form>
+
+
+{% endblock %}
