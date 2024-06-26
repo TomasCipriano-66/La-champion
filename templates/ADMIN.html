@@ -1,9 +1,42 @@
 {% extends "layout.html" %}
 {% block body %}
 
+<style>
+    .table-container {
+        display: none;
+    }
+</style>
+<script>
+    function toggleTable(checkbox, tableId) {
+            var table = document.getElementById(tableId);
+            if (checkbox.checked) {
+                table.style.display = 'block';
+            } else {
+                table.style.display = 'none';
+            }
+        }
+
+        function initTables() {
+            var checkbox1 = document.getElementById('checkbox1');
+            var checkbox2 = document.getElementById('checkbox2');
+
+            // Verificar si es la primera vez que se carga la página
+            if (localStorage.getItem('firstLoad') === null) {
+                checkbox1.checked = true; // Activar el checkbox solo la primera vez
+                checkbox1.checked = true;
+                localStorage.setItem('firstLoad', 'false'); // Marcar que ya no es la primera vez
+            }
+
+            toggleTable(checkbox1, 'table1');
+            toggleTable(checkbox2, 'table2');
+        }
+
+        window.onload = initTables;
+</script>
+
 
 <div class="row">
-    <div class="col-md-4">
+    <div class="justify-content-center col-md-4">
         <div class="card card-body">
             <form action="/add_team" method="POST">
                 <div class="form-group">
@@ -40,38 +73,86 @@
         </div>
     </div>
 
+
     <div class="col-md-16">
-        <table class="table table-striped table-hover table-bordered table-sm bg-white">
-            <thead>
-                <tr>
-                    <td>Equipo</td>
-                    <td>Colegio</td>
-                    <td>Deporte</td>
-                    <td>Categoria</td>
-                    <td>Telefono</td>
-                    <td>Score</td>
-                    <td>-------</td>
-                </tr>
-            </thead>
-            <tbody>
-                {% for team in teams %}
-                <tr>
-                    <td>{{team.1}}</td>
-                    <td>{{team.2}}</td>
-                    <td>{{team.3}}</td>
-                    <td>{{team.4}}</td>
-                    <td>{{team.5}}</td>
-                    <td>{{team.6}}</td>
-                    <td>
-                        <a href="/add/{{team.0}}" class="btn btn-success">+PTS</a>
-                        <a href="/edit/{{team.0}}" class="btn btn-secondary">Editar</a>
-                        <a href="/delete/{{team.0}}" class="btn btn-danger btn-delete">ELIMINAR</a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <div>
+            <input type="checkbox" id="checkbox1" checked onclick="toggleTable(this, 'table1')">
+            <label for="checkbox1">Mostrar Tabla pre-inscripcion</label>
+        </div>
+        <div>
+            <input type="checkbox" id="checkbox2" checked onclick="toggleTable(this, 'table2')">
+            <label for="checkbox2">Mostrar Tabla inscriptos</label>
+        </div>
+
+        <div id="table1" class="table-container">
+            <table class="table table-striped table-hover table-bordered table-sm bg-white">
+                <thead>
+                    <tr>
+                        <td>Equipo</td>
+                        <td>Colegio</td>
+                        <td>Deporte</td>
+                        <td>Categoria</td>
+                        <td>Telefono</td>
+                        <td>-------</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for inf in Table1_inf %}
+                    <tr>
+                        <td>{{inf.1}}</td>
+                        <td>{{inf.2}}</td>
+                        <td>{{inf.3}}</td>
+                        <td>{{inf.4}}</td>
+                        <td>{{inf.5}}</td>
+                        <td>
+
+                            <a href="{{ url_for('cargar_team', id=inf[0]) }}" class="btn btn-success">OK</a>
+                            <a href="{{ url_for('get_team', id=inf[0]) }}" class="btn btn-secondary">Editar</a>
+                            <a href="{{ url_for('delete_team', id=inf[0]) }}" class="btn btn-danger btn-delete">ELIMINAR</a>
+
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+
+        <div id="table2" class="table-container">
+            <table class="table table-striped table-hover table-bordered table-sm bg-white">
+                <thead>
+                    <tr>
+                        <td>Equipo</td>
+                        <td>Colegio</td>
+                        <td>Deporte</td>
+                        <td>Categoria</td>
+                        <td>Telefono</td>
+                        <td>SCORE</td>
+                        <td>-------</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for inf in Table2_inf %}
+                    <tr>
+                        <td>{{inf.1}}</td>
+                        <td>{{inf.2}}</td>
+                        <td>{{inf.3}}</td>
+                        <td>{{inf.4}}</td>
+                        <td>{{inf.5}}</td>
+                        <td>{{inf.6}}</td>
+                        <td>
+
+                            <a href="{{ url_for('add_pts', id=inf[0]) }}" class="btn btn-success">+PTS</a>
+
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
+
+
 </div>
 
 

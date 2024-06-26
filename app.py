@@ -24,15 +24,40 @@ def contacto():
 def inscripcion():
     return render_template('inscripcion.html')
 
-#fin de rutas general
 
+@app.route('/partidos')
+def partidos_view():
+    # Lógica para obtener los equipos y pasarlos a la plantilla
+    cur = mysql.connection.cursor()
+    cur.execute("""
+        SELECT Equipo, Telefono, SCORE
+        FROM Copa_renault
+        WHERE Deporte = 'Futbol'
+        ORDER BY SCORE DESC
+        LIMIT 3
+    """)
+    top_teams = cur.fetchall()
+    cur.close()
+
+    return render_template('partidos.html', top_teams=top_teams)
+
+
+# --------------SECCION ADMINS----------------
+
+#cargar tabla1
 @app.route('/ADMIN')
 def admin():
     cur = mysql.connection.cursor()
-    cur.execute('SELECT * FROM Copa_renault')
-    data = cur.fetchall()
+    cur.execute('SELECT * FROM Inscripcion')
+    data1 = cur.fetchall()
     cur.close()
-    return render_template('ADMIN.html', teams=data)
+    cur = mysql.connection.cursor()
+    cur.execute('SELECT * FROM Copa_renault')
+    data2 = cur.fetchall()
+    cur.close()
+    return render_template('ADMIN.html', Table1_inf = data1, Table2_inf = data2)
+
+
 
 #agregar un equipo
 @app.route('/add_team', methods=['POST'])
@@ -44,11 +69,81 @@ def add_team():
         Categoria = request.form['Categoria']
         Telefono = request.form['Telefono']
         cur = mysql.connection.cursor()
-        cur.execute('INSERT INTO Copa_renault (Equipo, Colegio, Deporte, Categoria, Telefono) VALUES (%s, %s, %s, %s, %s)',
+        cur.execute('INSERT INTO Inscripcion (Equipo, Colegio, Deporte, Categoria, Telefono) VALUES (%s, %s, %s, %s, %s)',
                     (Equipo, Colegio, Deporte, Categoria, Telefono))
         mysql.connection.commit()
         cur.close()
         return redirect(url_for('admin'))
+
+#TABLA DE EQUIPOS PRE_INCRIPCION
+
+#cargar un equipo de la DB para modificacion de valores
+@app.route('/edit/<string:id>')
+def get_team(id):
+    cur = mysql.connection.cursor()
+    cur.execute('SELECT * FROM Inscripcion WHERE id = %s', [id])
+    data = cur.fetchall()
+    cur.close()
+    return render_template('edit-team.html', team = data[0])
+
+#actualizar un equipo de la DB
+@app.route('/update/<string:id>', methods=['POST'])
+def update_team(id):
+    if request.method == 'POST':
+        Equipo = request.form['Equipo']
+        Colegio = request.form['Colegio']
+        Deporte = request.form['Deporte']
+        Categoria = request.form['Categoria']
+        Telefono = request.form['Telefono']
+        cur = mysql.connection.cursor()
+        cur.execute("""
+            UPDATE Inscripcion 
+            SET Equipo = %s,
+                Colegio = %s,
+                Deporte = %s,
+                Categoria = %s,
+                Telefono = %s
+            WHERE id = %s
+        """, (Equipo, Colegio, Deporte, Categoria, Telefono, id))
+        mysql.connection.commit()
+        cur.close()
+        return redirect(url_for('admin'))
+
+#eliminar un equipo de la DB
+@app.route('/delete/<string:id>')
+def delete_team(id):
+    cur = mysql.connection.cursor()
+    cur.execute('DELETE FROM Inscripcion WHERE id = %s', [id])
+    mysql.connection.commit()
+    cur.close()
+    return redirect(url_for('admin'))
+
+
+#confirmacion de inscripcion VALIDA
+
+@app.route('/cargar/<string:id>')
+def cargar_team(id):
+    cur = mysql.connection.cursor()
+    
+    # Obtener los datos de la tabla de origen utilizando el ID
+    cur.execute('SELECT Equipo, Colegio, Deporte, Categoria, Telefono FROM Inscripcion WHERE id = %s', [id])
+    data = cur.fetchone()
+    
+    if data:
+        # Insertar los datos en la nueva tabla
+        Equipo, Colegio, Deporte, Categoria, Telefono = data
+        cur.execute('INSERT INTO Copa_renault (Equipo, Colegio, Deporte, Categoria, Telefono) VALUES (%s, %s, %s, %s, %s)',
+                    (Equipo, Colegio, Deporte, Categoria, Telefono))
+        mysql.connection.commit()
+        cur = mysql.connection.cursor()
+        cur.execute('DELETE FROM Inscripcion WHERE id = %s', [id])
+        mysql.connection.commit()
+    
+    cur.close()
+    return redirect(url_for('admin'))
+
+
+#TABLA DE EQUIPOS INSCRIPTOS
 
 #dar puntos a un equipo
 @app.route('/add/<string:id>')
@@ -74,50 +169,7 @@ def add_pts(id):
         mysql.connection.commit()
         cur.close()
         return redirect(url_for('admin'))
-
-
-
-
-#cargar un equipo de la DB para modificacion de valores
-@app.route('/edit/<string:id>')
-def get_team(id):
-    cur = mysql.connection.cursor()
-    cur.execute('SELECT * FROM Copa_renault WHERE id = %s', [id])
-    data = cur.fetchall()
-    cur.close()
-    return render_template('edit-team.html', team = data[0])
-
-#actualizar un equipo de la DB
-@app.route('/update/<string:id>', methods=['POST'])
-def update_team(id):
-    if request.method == 'POST':
-        Equipo = request.form['Equipo']
-        Colegio = request.form['Colegio']
-        Deporte = request.form['Deporte']
-        Categoria = request.form['Categoria']
-        Telefono = request.form['Telefono']
-        cur = mysql.connection.cursor()
-        cur.execute("""
-            UPDATE Copa_renault 
-            SET Equipo = %s,
-                Colegio = %s,
-                Deporte = %s,
-                Categoria = %s,
-                Telefono = %s
-            WHERE id = %s
-        """, (Equipo, Colegio, Deporte, Categoria, Telefono, id))
-        mysql.connection.commit()
-        cur.close()
-        return redirect(url_for('admin'))
-
-#eliminar un equipo de la DB
-@app.route('/delete/<string:id>')
-def delete_team(id):
-    cur = mysql.connection.cursor()
-    cur.execute('DELETE FROM Copa_renault WHERE id = %s', [id])
-    mysql.connection.commit()
-    cur.close()
-    return redirect(url_for('admin'))
-
+    
+    
 if __name__ == '__main__':
     app.run(port=2500, debug=True)
