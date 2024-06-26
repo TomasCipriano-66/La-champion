@@ -1,65 +1,29 @@
-function mostrarPodio(opcion) {
-    var contenido = 'opcion1';
-    if (opcion === 'opcion1') {
-        contenido = `
-            <div class="box">
-                <div class="number">1</div>
-                <div class="cover"><img src="https://m.media-amazon.com/images/I/91-kmdlsEsL._SS500_.jpg" alt="01"></div>
-                <div class="name"><span>Mi gente</span></div>
-            </div>
-            <div class="separator"></div>
-            <div class="box">
-                <div class="number">2</div>
-                <div class="cover"><img src="http://bit.ly/2vlCeWf" alt="02"></div>
-                <div class="name"><span>Feels</span></div>
-            </div>
-            <div class="separator"></div>
-            <div class="box">
-                <div class="number">3</div>
-                <div class="cover"><img src="http://bit.ly/2vlRum1" alt="03"></div>
-                <div class="name"><span>Attention</span></div>
-            </div>`;
-    } else if (opcion === 'opcion2') {
-        contenido = `
-            <div class="box">
-                <div class="number">1</div>
-                <div class="cover"><img src="static/images/fotomati.png" alt="04"></div>
-                <div class="name"><span>New Song 1</span></div>
-            </div>
-            <div class="separator"></div>
-            <div class="box">
-                <div class="number">2</div>
-                <div class="cover"><img src="static/images/fotomati.png" alt="05"></div>
-                <div class="name"><span>New Song 2</span></div>
-            </div>
-            <div class="separator"></div>
-            <div class="box">
-                <div class="number">3</div>
-                <div class="cover"><img src="static/images/fotomati.png" alt="06"></div>
-                <div class="name"><span>New Song 3</span></div>
-            </div>`;
-    } else if (opcion === 'opcion3') {
-        contenido = `
-            <div class="box">
-                <div class="number">1</div>
-                <div class="cover"><img src="static/images/fotomati.png" alt="07"></div>
-                <div class="name"><span>Another Song 1</span></div>
-            </div>
-            <div class="separator"></div>
-            <div class="box">
-                <div class="number">2</div>
-                <div class="cover"><img src="static/images/fotomati.png" alt="08"></div>
-                <div class="name"><span>Another Song 2</span></div>
-            </div>
-            <div class="separator"></div>
-            <div class="box">
-                <div class="number">3</div>
-                <div class="cover"><img src="static/images/fotomati.png" alt="09"></div>
-                <div class="name"><span>Another Song 3</span></div>
-            </div>`;
-    }
-    document.getElementById('podio').innerHTML = contenido;
+function mostrarPodio(deporte) {
+    fetch(`/podio/${deporte}`)
+        .then(response => response.json())
+        .then(data => {
+            let contenido = '';
+            data.forEach((team, index) => {
+                contenido += `
+                <div class="box">
+                    <div class="number">${index + 1}</div>
+                    <div class="cover"><img src="static/images/default.jpg" alt="Team ${index + 1}"></div>
+                    <div class="grup">
+                        <div class="name"><span>${team[0]}</span></div>
+                        <div class="colegio"><span>${team[1]}</span></div>
+                    </div>
+                    <div class="score"><span>${team[2]} pts</span></div>
+                </div>
+                <div class="separator"></div>`;
+            });
+            document.getElementById('podio').innerHTML = contenido;
+        });
 }
+
+// Cargar el podio de futbol por defecto al cargar la página
+document.addEventListener('DOMContentLoaded', () => {
+    mostrarPodio('Futbol');
+});
 
 
 document.addEventListener("DOMContentLoaded", function() {

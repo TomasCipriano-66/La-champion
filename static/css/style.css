@@ -1051,9 +1051,10 @@ ul.link li a::after {
 /* Ranking */
 .box {
     display: block;
-    width: 80%;
+    width: 85%;
     height: 150px; /* SizeH */
     margin: 20px auto;
+    padding-right: 20px;
 }
 
 /* Number */
@@ -1085,8 +1086,9 @@ ul.link li a::after {
 /* Name */
 .name {
     float: left;
-    height: 150px; /* SizeH */
-    line-height: 150px; /* SizeH */
+    height: 80px; /* SizeH */
+    line-height: 100px; /* SizeH */
+    width: 50%;
     font-size: 30px;
     font-weight: bold;
     color: black;
@@ -1219,4 +1221,25 @@ hr{
 
 .button:hover {
     opacity: 0.8;
+}
+
+.grup {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1px; /* Ajusta el margen superior si es necesario */
+
+}
+
+.colegio {
+    font-size: 20px;
+    color: #525252;
+}
+
+
+.score {
+    float: right;
+    font-size:35px;
+    font-weight: bold;
+    color: #fd9729;
+    margin-top: -75px;
 }

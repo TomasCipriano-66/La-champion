@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, jsonify
 from flask_mysqldb import MySQL
 
 app = Flask(__name__)
@@ -24,22 +24,20 @@ def contacto():
 def inscripcion():
     return render_template('inscripcion.html')
 
-
-@app.route('/partidos')
-def partidos_view():
-    # Lógica para obtener los equipos y pasarlos a la plantilla
+@app.route('/podio/<deporte>')
+def podio(deporte):
     cur = mysql.connection.cursor()
-    cur.execute("""
-        SELECT Equipo, Telefono, SCORE
+    query = """
+        SELECT Equipo, Colegio, SCORE
         FROM Copa_renault
-        WHERE Deporte = 'Futbol'
+        WHERE Deporte = %s
         ORDER BY SCORE DESC
         LIMIT 3
-    """)
+    """
+    cur.execute(query, (deporte,))
     top_teams = cur.fetchall()
     cur.close()
-
-    return render_template('partidos.html', top_teams=top_teams)
+    return jsonify(top_teams)
 
 
 # --------------SECCION ADMINS----------------

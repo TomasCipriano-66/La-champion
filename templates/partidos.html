@@ -10,96 +10,45 @@ Título de la página de inicio
       <div class="title_podium">
          <h1>PODIO COPA RENAULT</h1>
       </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      <!-- Buttons -->
       <div class="buttons_categories">
-         <button onclick="mostrarPodio('opcion1')" class="active">Futbol ⚽</button>
-         <button onclick="mostrarPodio('opcion2')">Basquet 🏀</button>
-         <button onclick="mostrarPodio('opcion3')">Voley 🏐</button>
+         <button onclick="mostrarPodio('Futbol')" class="active">Futbol ⚽</button>
+         <button onclick="mostrarPodio('Basquet')">Basquet 🏀</button>
+         <button onclick="mostrarPodio('Voley')">Voley 🏐</button>
       </div>
       <hr>
-      <div id="podio">
-         {% for index in range(top_teams|length) %}
-         {% set team = top_teams[index] %}
-         <div class="box">
-            <div class="number">{{ index + 1 }}</div>
-            <!-- Puedes cambiar la ruta de la imagen según tus necesidades -->
-            <div class="cover"><img src="https://m.media-amazon.com/images/I/91-kmdlsEsL._SS500_.jpg"
-                  alt="{{ team[0] }}"></div>
-            <div class="name"><span>{{ team[0] }}</span></div> <!-- Nombre del equipo -->
-            <div class="puntos">{{ team[2] }} puntos</div> <!-- Puntos del equipo -->
+      <div id="podio"></div>
+   </div>
+
+
+
+
+
+   <h2 class="title_map">MAPA DEL INSTITUTO</h2>
+   <div class="container">
+      <img src="static/images/instituto.png" class="mapa" />
+      <div class="menu">
+         <div class="title_fixture">
+            <h1>Consulte los horarios de los partidos</h1>
          </div>
-         {% if index < top_teams|length - 1 %} <div class="separator">
-      </div>
-      {% endif %}
-      {% endfor %}
-   </div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2 class="title_map">MAPA DEL INSTITUTO</h2>
-<div class="container">
-   <img src="static/images/instituto.png" class="mapa" />
-   <div class="menu">
-      <div class="title_fixture">
-         <h1>Consulte los horarios de los partidos</h1>
-      </div>
-      <h1>Fixture Futbol</h1>
-      <div class="buttons">
-         <a href="static/recursos/FIXTURE.pdf" target="_blank" class="button view">Ver PDF</a>
-         <a href="static/recursos/FIXTURE.pdf" download class="button download">Descargar PDF</a>
-      </div>
-      <hr>
-      <h1>Fixture Basquet</h1>
-      <div class="buttons">
-         <a href="static/recursos/FIXTURE.pdf" target="_blank" class="button view">Ver PDF</a>
-         <a href="static/recursos/FIXTURE.pdf" download class="button download">Descargar PDF</a>
-      </div>
-      <hr>
-      <h1>Fixture Voley</h1>
-      <div class="buttons">
-         <a href="static/recursos/FIXTURE.pdf" target="_blank" class="button view">Ver PDF</a>
-         <a href="static/recursos/FIXTURE.pdf" download class="button download">Descargar PDF</a>
+         <h1>Fixture Futbol</h1>
+         <div class="buttons">
+            <a href="static/recursos/FIXTURE.pdf" target="_blank" class="button view">Ver PDF</a>
+            <a href="static/recursos/FIXTURE.pdf" download class="button download">Descargar PDF</a>
+         </div>
+         <hr>
+         <h1>Fixture Basquet</h1>
+         <div class="buttons">
+            <a href="static/recursos/FIXTURE.pdf" target="_blank" class="button view">Ver PDF</a>
+            <a href="static/recursos/FIXTURE.pdf" download class="button download">Descargar PDF</a>
+         </div>
+         <hr>
+         <h1>Fixture Voley</h1>
+         <div class="buttons">
+            <a href="static/recursos/FIXTURE.pdf" target="_blank" class="button view">Ver PDF</a>
+            <a href="static/recursos/FIXTURE.pdf" download class="button download">Descargar PDF</a>
+         </div>
       </div>
    </div>
-</div>
 
 
 </div>
