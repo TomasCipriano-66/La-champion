@@ -43,3 +43,4 @@ Para ejecutar la aplicación, utiliza el siguiente comando en la carpeta del pro
 
 ```bash
 python app.py
+```
