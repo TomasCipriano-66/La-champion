@@ -66,9 +66,17 @@ def add_team():
         Deporte = request.form['Deporte']
         Categoria = request.form['Categoria']
         Telefono = request.form['Telefono']
+        DNI = request.form['DNI']
+        Correo = request.form['Correo']
+        Miembros = request.form['Miembros']
+        Acompañantes = request.form['Acompañantes']
+        Vegetariano = request.form['Vegetariano']
+        Celiaco = request.form['Celiaco']
+        Diabetico = request.form['Diabetico']
+
         cur = mysql.connection.cursor()
-        cur.execute('INSERT INTO Inscripcion (Equipo, Colegio, Deporte, Categoria, Telefono) VALUES (%s, %s, %s, %s, %s)',
-                    (Equipo, Colegio, Deporte, Categoria, Telefono))
+        cur.execute('INSERT INTO Inscripcion (Equipo, Colegio, Deporte, Categoria, Telefono, DNI, Correo, Miembros, Acompañantes, Vegetariano, Celiaco, Diabetico) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)',
+                    (Equipo, Colegio, Deporte, Categoria, Telefono, DNI, Correo, Miembros, Acompañantes, Vegetariano, Celiaco, Diabetico))
         mysql.connection.commit()
         cur.close()
         return redirect(url_for('admin'))
@@ -93,6 +101,13 @@ def update_team(id):
         Deporte = request.form['Deporte']
         Categoria = request.form['Categoria']
         Telefono = request.form['Telefono']
+        DNI = request.form['DNI']
+        Correo = request.form['Correo']
+        Miembros = request.form['Miembros']
+        Acompañantes = request.form['Acompañantes']
+        Vegetariano = request.form['Vegetariano']
+        Celiaco = request.form['Celiaco']
+        Diabetico = request.form['Diabetico']
         cur = mysql.connection.cursor()
         cur.execute("""
             UPDATE Inscripcion 
@@ -100,9 +115,16 @@ def update_team(id):
                 Colegio = %s,
                 Deporte = %s,
                 Categoria = %s,
-                Telefono = %s
+                Telefono = %s,
+                DNI = %s,
+                Correo = %s,
+                Miembros = %s,
+                Acompañantes = %s,
+                Vegetariano = %s,
+                Celiaco = %s,
+                Diabetico = %s
             WHERE id = %s
-        """, (Equipo, Colegio, Deporte, Categoria, Telefono, id))
+        """, (Equipo, Colegio, Deporte, Categoria, Telefono, DNI, Correo, Miembros, Acompañantes, Vegetariano, Celiaco, Diabetico, id))
         mysql.connection.commit()
         cur.close()
         return redirect(url_for('admin'))
@@ -123,17 +145,16 @@ def delete_team(id):
 def cargar_team(id):
     cur = mysql.connection.cursor()
     
-    # Obtener los datos de la tabla de origen utilizando el ID
-    cur.execute('SELECT Equipo, Colegio, Deporte, Categoria, Telefono FROM Inscripcion WHERE id = %s', [id])
+    # Obtener todos los datos necesarios de la tabla de origen utilizando el ID
+    cur.execute('SELECT Equipo, Colegio, Deporte, Categoria, Telefono, DNI, Correo, Miembros, Acompañantes, Vegetariano, Celiaco, Diabetico FROM Inscripcion WHERE id = %s', [id])
     data = cur.fetchone()
     
     if data:
         # Insertar los datos en la nueva tabla
-        Equipo, Colegio, Deporte, Categoria, Telefono = data
-        cur.execute('INSERT INTO Copa_renault (Equipo, Colegio, Deporte, Categoria, Telefono) VALUES (%s, %s, %s, %s, %s)',
-                    (Equipo, Colegio, Deporte, Categoria, Telefono))
+        cur.execute('INSERT INTO Copa_renault (Equipo, Colegio, Deporte, Categoria, Telefono, DNI, Correo, Miembros, Acompañantes, Vegetariano, Celiaco, Diabetico) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)', data)
         mysql.connection.commit()
-        cur = mysql.connection.cursor()
+        
+        # Eliminar el equipo de la tabla de origen
         cur.execute('DELETE FROM Inscripcion WHERE id = %s', [id])
         mysql.connection.commit()
     

@@ -66,15 +66,65 @@
                 </div>
                 <div class="form-group">
                     <label for="Telefono">Teléfono</label>
-                    <input type="tel" class="form-control" id="Telefono" name="Telefono" placeholder="Teléfono">
+                    <input type="tel" class="form-control" id="Telefono" name="Telefono" placeholder="Teléfono (sin guiones)">
                 </div>
+                <div class="form-group">
+                    <label for="DNI">DNI</label>
+                    <input type="DNI" class="form-control" id="DNI" name="DNI" placeholder="DNI (sin puntos)">
+                </div>
+                <div class="form-group">
+                    <label for="Correo">Correo</label>
+                    <input type="Correo" class="form-control" id="Correo" name="Correo" placeholder="Correo">
+                </div>
+                <div class="form-group">
+                    <label for="Miembros">Miembros</label>
+                    <input type="Miembros" class="form-control" id="Miembros" name="Miembros" placeholder="Miembros (int)">
+                </div>
+                <div class="form-group">
+                    <label for="Acompañantes">Acompañantes</label>
+                    <input type="Acompañantes" class="form-control" id="Acompañantes" name="Acompañantes" placeholder="Acompañantes (int)">
+                </div>
+                <div class="form-group">
+                    <label for="Vegetariano">Vegetariano</label>
+                    <select class="form-control" id="Vegetariano" name="Vegetariano">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="NO">NINGUNO</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="Celiaco">Celiaco</label>
+                    <select class="form-control" id="Celiaco" name="Celiaco">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="NO">NINGUNO</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="Diabetico">Diabetico</label>
+                    <select class="form-control" id="Diabetico" name="Diabetico">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="NO">NINGUNO</option>
+                    </select>
+                </div>
+                
                 <button type="submit" class="btn btn-primary btn-block">Guardar</button>
             </form>
         </div>
     </div>
 
 
-    <div class="col-md-16">
+    <div class="col-md-16" style="margin: 40px;">
         <div>
             <input type="checkbox" id="checkbox1" checked onclick="toggleTable(this, 'table1')">
             <label for="checkbox1">Mostrar Tabla pre-inscripcion</label>
@@ -93,6 +143,13 @@
                         <td>Deporte</td>
                         <td>Categoria</td>
                         <td>Telefono</td>
+                        <td>DNI</td>
+                        <td>Correo</td>
+                        <td>Miembros</td>
+                        <td>Acompañantes</td>
+                        <td>Vegetariano</td>
+                        <td>Celiaco</td>
+                        <td>Diabetico</td>
                         <td>-------</td>
                     </tr>
                 </thead>
@@ -104,6 +161,13 @@
                         <td>{{inf.3}}</td>
                         <td>{{inf.4}}</td>
                         <td>{{inf.5}}</td>
+                        <td>{{inf.6}}</td>
+                        <td>{{inf.7}}</td>
+                        <td>{{inf.8}}</td>
+                        <td>{{inf.9}}</td>
+                        <td>{{inf.10}}</td>
+                        <td>{{inf.11}}</td>
+                        <td>{{inf.12}}</td>
                         <td>
 
                             <a href="{{ url_for('cargar_team', id=inf[0]) }}" class="btn btn-success">OK</a>
@@ -127,6 +191,13 @@
                         <td>Deporte</td>
                         <td>Categoria</td>
                         <td>Telefono</td>
+                        <td>DNI</td>
+                        <td>Correo</td>
+                        <td>Miembros</td>
+                        <td>Acompañantes</td>
+                        <td>Vegetariano</td>
+                        <td>Celiaco</td>
+                        <td>Diabetico</td>
                         <td>SCORE</td>
                         <td>-------</td>
                     </tr>
@@ -140,6 +211,13 @@
                         <td>{{inf.4}}</td>
                         <td>{{inf.5}}</td>
                         <td>{{inf.6}}</td>
+                        <td>{{inf.7}}</td>
+                        <td>{{inf.8}}</td>
+                        <td>{{inf.9}}</td>
+                        <td>{{inf.10}}</td>
+                        <td>{{inf.11}}</td>
+                        <td>{{inf.12}}</td>
+                        <td>{{inf.13}}</td>
                         <td>
 
                             <a href="{{ url_for('add_pts', id=inf[0]) }}" class="btn btn-success">+PTS</a>
