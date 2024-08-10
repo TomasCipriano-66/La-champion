@@ -1,7 +1,34 @@
 {% extends "layout.html" %}
 {% block body %}
 
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Equipo</title>
+    <style>
+        .alert {
+            transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+        }
+
+        .fade-out {
+            opacity: 0;
+            visibility: hidden;
+        }
+    </style>
+</head>
+
 <div class="container">
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="alert-container">
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -94,6 +121,17 @@
     </div>
 </div>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Espera 3 segundos (3000 milisegundos) antes de iniciar la transición
+        setTimeout(function() {
+            const alertContainers = document.querySelectorAll('.alert');
+            alertContainers.forEach(container => {
+                container.classList.add('fade-out'); // Aplica la clase fade-out
+            });
+        }, 3000);
+    });
+</script>
 
 
     {% endblock %}

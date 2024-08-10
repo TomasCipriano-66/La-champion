@@ -1,7 +1,9 @@
-from flask import Flask, render_template, request, redirect, url_for, jsonify
+from flask import Flask, render_template, request, redirect, url_for, jsonify,  flash
 from flask_mysqldb import MySQL
 
 app = Flask(__name__)
+app.secret_key = 'scuby'  # Necesaria para usar sesiones
+
 app.config['MYSQL_USER'] = 'u2jsmodvktmxthwk'
 app.config['MYSQL_PASSWORD'] = 'JTSZ6HR3AMgW3HDo7ykz'
 app.config['MYSQL_HOST'] = 'bwpeifpsxajflfti7mrf-mysql.services.clever-cloud.com' 
@@ -58,9 +60,10 @@ def admin():
 
 
 #agregar un equipo
-@app.route('/add_team', methods=['POST'])
+@app.route('/add_team', methods=['GET', 'POST'])
 def add_team():
     if request.method == 'POST':
+        # Código para manejar el formulario cuando se envía
         Equipo = request.form['Equipo']
         Colegio = request.form['Colegio']
         Deporte = request.form['Deporte']
@@ -74,12 +77,20 @@ def add_team():
         Celiaco = request.form['Celiaco']
         Diabetico = request.form['Diabetico']
 
+        if not all([Equipo, Colegio, Deporte, Categoria, Telefono, DNI, Correo, Miembros, Acompañantes]):
+            flash('Por favor completa TODOS los campos.', 'danger')
+            return redirect(url_for('add_team'))
+
         cur = mysql.connection.cursor()
         cur.execute('INSERT INTO Inscripcion (Equipo, Colegio, Deporte, Categoria, Telefono, DNI, Correo, Miembros, Acompañantes, Vegetariano, Celiaco, Diabetico) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)',
                     (Equipo, Colegio, Deporte, Categoria, Telefono, DNI, Correo, Miembros, Acompañantes, Vegetariano, Celiaco, Diabetico))
         mysql.connection.commit()
         cur.close()
         return redirect(url_for('admin'))
+    else:
+        # mostrar el formulario
+        return render_template('add-team.html')
+
 
 #TABLA DE EQUIPOS PRE_INCRIPCION
 
@@ -108,6 +119,11 @@ def update_team(id):
         Vegetariano = request.form['Vegetariano']
         Celiaco = request.form['Celiaco']
         Diabetico = request.form['Diabetico']
+        
+        if not all([Equipo, Colegio, Deporte, Categoria, Telefono, DNI, Correo, Miembros, Acompañantes]):
+            flash('Por favor completa TODOS los campos.', 'danger')
+            return redirect(url_for('edit_team'))
+        
         cur = mysql.connection.cursor()
         cur.execute("""
             UPDATE Inscripcion 
@@ -128,6 +144,9 @@ def update_team(id):
         mysql.connection.commit()
         cur.close()
         return redirect(url_for('admin'))
+    else:
+        # mostrar el formulario
+        return render_template('edit-team.html')
 
 #eliminar un equipo de la DB
 @app.route('/delete/<string:id>')

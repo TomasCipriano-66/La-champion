@@ -5,230 +5,218 @@
     .table-container {
         display: none;
     }
+
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 36px; /* Reducción al 60% de 60px */
+        height: 20px; /* Reducción al 60% de 34px */
+    }
+
+    /* Esconder el checkbox original */
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    /* Slider */
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: .4s;
+        border-radius: 20px; /* Ajustado para mantener proporciones */
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 16px; /* Reducción al 60% de 26px */
+        width: 16px; /* Reducción al 60% de 26px */
+        left: 2px; /* Ajustado para mantener proporciones */
+        bottom: 2px; /* Ajustado para mantener proporciones */
+        background-color: white;
+        transition: .4s;
+        border-radius: 50%;
+    }
+
+    input:checked + .slider {
+        background-color: #4CAF50;
+    }
+
+    input:checked + .slider:before {
+        transform: translateX(16px); /* Ajustado para el nuevo tamaño */
+    }
+
+    /* Estilo de las etiquetas */
+    .slider-label {
+        margin-left: 8px; /* Ajustado para el nuevo tamaño */
+        font-size: 14px; /* Ajustado para el nuevo tamaño */
+        vertical-align: middle;
+    }
 </style>
 <script>
     function toggleTable(checkbox, tableId) {
-            var table = document.getElementById(tableId);
-            if (checkbox.checked) {
-                table.style.display = 'block';
-            } else {
-                table.style.display = 'none';
-            }
+        var table = document.getElementById(tableId);
+        if (checkbox.checked) {
+            table.style.display = 'block';
+        } else {
+            table.style.display = 'none';
+        }
+    }
+
+    function initTables() {
+        var checkbox1 = document.getElementById('checkbox1');
+        var checkbox2 = document.getElementById('checkbox2');
+
+        // Verificar si es la primera vez que se carga la página
+        if (localStorage.getItem('firstLoad') === null) {
+            checkbox1.checked = true; // Activar el checkbox solo la primera vez
+            checkbox1.checked = true;
+            localStorage.setItem('firstLoad', 'false'); // Marcar que ya no es la primera vez
         }
 
-        function initTables() {
-            var checkbox1 = document.getElementById('checkbox1');
-            var checkbox2 = document.getElementById('checkbox2');
+        toggleTable(checkbox1, 'table1');
+        toggleTable(checkbox2, 'table2');
+    }
 
-            // Verificar si es la primera vez que se carga la página
-            if (localStorage.getItem('firstLoad') === null) {
-                checkbox1.checked = true; // Activar el checkbox solo la primera vez
-                checkbox1.checked = true;
-                localStorage.setItem('firstLoad', 'false'); // Marcar que ya no es la primera vez
-            }
-
-            toggleTable(checkbox1, 'table1');
-            toggleTable(checkbox2, 'table2');
-        }
-
-        window.onload = initTables;
+    window.onload = initTables;
 </script>
 
-
-<div class="row">
-    <div class="justify-content-center col-md-4">
-        <div class="card card-body">
-            <form action="/add_team" method="POST">
-                <div class="form-group">
-                    <label for="Equipo">Equipo</label>
-                    <input type="text" class="form-control" id="Equipo" name="Equipo" placeholder="Equipo">
-                </div>
-                <div class="form-group">
-                    <label for="Colegio">Colegio</label>
-                    <input type="text" class="form-control" id="Colegio" name="Colegio" placeholder="Colegio">
-                </div>
-                <div class="form-group">
-                    <label for="Deporte">Deporte</label>
-                    <select class="form-control" id="Deporte" name="Deporte">
-                        <option value="Futbol">Futbol</option>
-                        <option value="Basquet">Basquet</option>
-                        <option value="Voley">Voley</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="Categoria">Categoría</label>
-                    <select class="form-control" id="Categoria" name="Categoria">
-                        <option value="Masculino mayor">Masculino mayor</option>
-                        <option value="Masculino menor">Masculino menor</option>
-                        <option value="Femenino mayor">Femenino mayor</option>
-                        <option value="Femenino menor">Femenino menor</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="Telefono">Teléfono</label>
-                    <input type="tel" class="form-control" id="Telefono" name="Telefono" placeholder="Teléfono (sin guiones)">
-                </div>
-                <div class="form-group">
-                    <label for="DNI">DNI</label>
-                    <input type="DNI" class="form-control" id="DNI" name="DNI" placeholder="DNI (sin puntos)">
-                </div>
-                <div class="form-group">
-                    <label for="Correo">Correo</label>
-                    <input type="Correo" class="form-control" id="Correo" name="Correo" placeholder="Correo">
-                </div>
-                <div class="form-group">
-                    <label for="Miembros">Miembros</label>
-                    <input type="Miembros" class="form-control" id="Miembros" name="Miembros" placeholder="Miembros (int)">
-                </div>
-                <div class="form-group">
-                    <label for="Acompañantes">Acompañantes</label>
-                    <input type="Acompañantes" class="form-control" id="Acompañantes" name="Acompañantes" placeholder="Acompañantes (int)">
-                </div>
-                <div class="form-group">
-                    <label for="Vegetariano">Vegetariano</label>
-                    <select class="form-control" id="Vegetariano" name="Vegetariano">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="NO">NINGUNO</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="Celiaco">Celiaco</label>
-                    <select class="form-control" id="Celiaco" name="Celiaco">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="NO">NINGUNO</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="Diabetico">Diabetico</label>
-                    <select class="form-control" id="Diabetico" name="Diabetico">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="NO">NINGUNO</option>
-                    </select>
-                </div>
-                
-                <button type="submit" class="btn btn-primary btn-block">Guardar</button>
-            </form>
+<div class="col-md-16" style="margin: 40px;">
+    <div class="admin_bar" style="border: 1px solid #ccc; padding: 20px; border-radius: 5px; display: flex; justify-content: space-between; align-items: flex-start;">
+        <div class="button-container" style="display: flex; flex-direction: row; margin-bottom: 10px;">
+            <a href="{{ url_for('add_team') }}" class="btn btn-success" style="margin-right: 10px;">Agregar un equipo</a>
+            <a  class="btn btn-info">PDF</a>
+        </div>
+        
+        <div class="filter-container" style="display: flex; align-items: center;">
+            <input type="text" placeholder="Filtrar..." class="form-control" style="width: 200px;">
         </div>
     </div>
 
-
-    <div class="col-md-16" style="margin: 40px;">
+    <div class="checkbox-container" style="margin-top: 10px; margin-left: 20px;">
         <div>
-            <input type="checkbox" id="checkbox1" checked onclick="toggleTable(this, 'table1')">
-            <label for="checkbox1">Mostrar Tabla pre-inscripcion</label>
+            <label class="switch">
+                <input type="checkbox" id="checkbox1" checked onclick="toggleTable(this, 'table1')">
+                <span class="slider round"></span>
+            </label>
+            <label for="checkbox1" class="slider-label" style="margin-top: 5px;">Mostrar Tabla pre-inscripcion</label>
         </div>
         <div>
-            <input type="checkbox" id="checkbox2" checked onclick="toggleTable(this, 'table2')">
-            <label for="checkbox2">Mostrar Tabla inscriptos</label>
-        </div>
-
-        <div id="table1" class="table-container">
-            <table class="table table-striped table-hover table-bordered table-sm bg-white">
-                <thead>
-                    <tr>
-                        <td>Equipo</td>
-                        <td>Colegio</td>
-                        <td>Deporte</td>
-                        <td>Categoria</td>
-                        <td>Telefono</td>
-                        <td>DNI</td>
-                        <td>Correo</td>
-                        <td>Miembros</td>
-                        <td>Acompañantes</td>
-                        <td>Vegetariano</td>
-                        <td>Celiaco</td>
-                        <td>Diabetico</td>
-                        <td>-------</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for inf in Table1_inf %}
-                    <tr>
-                        <td>{{inf.1}}</td>
-                        <td>{{inf.2}}</td>
-                        <td>{{inf.3}}</td>
-                        <td>{{inf.4}}</td>
-                        <td>{{inf.5}}</td>
-                        <td>{{inf.6}}</td>
-                        <td>{{inf.7}}</td>
-                        <td>{{inf.8}}</td>
-                        <td>{{inf.9}}</td>
-                        <td>{{inf.10}}</td>
-                        <td>{{inf.11}}</td>
-                        <td>{{inf.12}}</td>
-                        <td>
-
-                            <a href="{{ url_for('cargar_team', id=inf[0]) }}" class="btn btn-success">OK</a>
-                            <a href="{{ url_for('get_team', id=inf[0]) }}" class="btn btn-secondary">Editar</a>
-                            <a href="{{ url_for('delete_team', id=inf[0]) }}" class="btn btn-danger btn-delete">ELIMINAR</a>
-
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-
-
-        <div id="table2" class="table-container">
-            <table class="table table-striped table-hover table-bordered table-sm bg-white">
-                <thead>
-                    <tr>
-                        <td>Equipo</td>
-                        <td>Colegio</td>
-                        <td>Deporte</td>
-                        <td>Categoria</td>
-                        <td>Telefono</td>
-                        <td>DNI</td>
-                        <td>Correo</td>
-                        <td>Miembros</td>
-                        <td>Acompañantes</td>
-                        <td>Vegetariano</td>
-                        <td>Celiaco</td>
-                        <td>Diabetico</td>
-                        <td>SCORE</td>
-                        <td>-------</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for inf in Table2_inf %}
-                    <tr>
-                        <td>{{inf.1}}</td>
-                        <td>{{inf.2}}</td>
-                        <td>{{inf.3}}</td>
-                        <td>{{inf.4}}</td>
-                        <td>{{inf.5}}</td>
-                        <td>{{inf.6}}</td>
-                        <td>{{inf.7}}</td>
-                        <td>{{inf.8}}</td>
-                        <td>{{inf.9}}</td>
-                        <td>{{inf.10}}</td>
-                        <td>{{inf.11}}</td>
-                        <td>{{inf.12}}</td>
-                        <td>{{inf.13}}</td>
-                        <td>
-
-                            <a href="{{ url_for('add_pts', id=inf[0]) }}" class="btn btn-success">+PTS</a>
-
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+            <label class="switch">
+                <input type="checkbox" id="checkbox2" checked onclick="toggleTable(this, 'table2')">
+                <span class="slider round"></span>
+            </label>
+            <label for="checkbox2" class="slider-label" style="margin-top: 5px;">Mostrar Tabla inscriptos</label>
         </div>
     </div>
+</div>
+
+
+
+
+
+<div id="table1" class="table-container">
+    <table class="table table-striped table-hover table-bordered table-sm bg-white">
+        <thead>
+            <tr>
+                <td>Equipo</td>
+                <td>Colegio</td>
+                <td>Deporte</td>
+                <td>Categoria</td>
+                <td>Telefono</td>
+                <td>DNI</td>
+                <td>Correo</td>
+                <td>Miembros</td>
+                <td>Acompañantes</td>
+                <td>Vegetariano</td>
+                <td>Celiaco</td>
+                <td>Diabetico</td>
+                <td>-------</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for inf in Table1_inf %}
+            <tr>
+                <td>{{inf.1}}</td>
+                <td>{{inf.2}}</td>
+                <td>{{inf.3}}</td>
+                <td>{{inf.4}}</td>
+                <td>{{inf.5}}</td>
+                <td>{{inf.6}}</td>
+                <td>{{inf.7}}</td>
+                <td>{{inf.8}}</td>
+                <td>{{inf.9}}</td>
+                <td>{{inf.10}}</td>
+                <td>{{inf.11}}</td>
+                <td>{{inf.12}}</td>
+                <td>
+
+                    <a href="{{ url_for('cargar_team', id=inf[0]) }}" class="btn btn-success">OK</a>
+                    <a href="{{ url_for('get_team', id=inf[0]) }}" class="btn btn-secondary">Editar</a>
+                    <a href="{{ url_for('delete_team', id=inf[0]) }}" class="btn btn-danger btn-delete">ELIMINAR</a>
+
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+<div id="table2" class="table-container">
+    <table class="table table-striped table-hover table-bordered table-sm bg-white">
+        <thead>
+            <tr>
+                <td>Equipo</td>
+                <td>Colegio</td>
+                <td>Deporte</td>
+                <td>Categoria</td>
+                <td>Telefono</td>
+                <td>DNI</td>
+                <td>Correo</td>
+                <td>Miembros</td>
+                <td>Acompañantes</td>
+                <td>Vegetariano</td>
+                <td>Celiaco</td>
+                <td>Diabetico</td>
+                <td>SCORE</td>
+                <td>-------</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for inf in Table2_inf %}
+            <tr>
+                <td>{{inf.1}}</td>
+                <td>{{inf.2}}</td>
+                <td>{{inf.3}}</td>
+                <td>{{inf.4}}</td>
+                <td>{{inf.5}}</td>
+                <td>{{inf.6}}</td>
+                <td>{{inf.7}}</td>
+                <td>{{inf.8}}</td>
+                <td>{{inf.9}}</td>
+                <td>{{inf.10}}</td>
+                <td>{{inf.11}}</td>
+                <td>{{inf.12}}</td>
+                <td>{{inf.13}}</td>
+                <td>
+
+                    <a href="{{ url_for('add_pts', id=inf[0]) }}" class="btn btn-success">+PTS</a>
+
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</div>
 
 
 </div>

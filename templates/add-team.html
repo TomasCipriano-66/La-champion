@@ -1,0 +1,140 @@
+{% extends "layout.html" %}
+{% block body %}
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>Agregar Equipo</title>
+    <style>
+        .alert {
+            transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+        }
+
+        .fade-out {
+            opacity: 0;
+            visibility: hidden;
+        }
+    </style>
+</head>
+
+
+<div class="container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="alert-container">
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <form action="/add_team" method="POST">
+                        <div class="form-group">
+                            <label for="Equipo">Equipo</label>
+                            <input type="text" class="form-control" id="Equipo" name="Equipo" placeholder="Equipo">
+                        </div>
+                        <div class="form-group">
+                            <label for="Colegio">Colegio</label>
+                            <input type="text" class="form-control" id="Colegio" name="Colegio" placeholder="Colegio">
+                        </div>
+                        <div class="form-group">
+                            <label for="Deporte">Deporte</label>
+                            <select class="form-control" id="Deporte" name="Deporte">
+                                <option value="Futbol">Futbol</option>
+                                <option value="Basquet">Basquet</option>
+                                <option value="Voley">Voley</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="Categoria">Categoría</label>
+                            <select class="form-control" id="Categoria" name="Categoria">
+                                <option value="Masculino mayor">Masculino mayor</option>
+                                <option value="Masculino menor">Masculino menor</option>
+                                <option value="Femenino mayor">Femenino mayor</option>
+                                <option value="Femenino menor">Femenino menor</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="Telefono">Teléfono</label>
+                            <input type="tel" class="form-control" id="Telefono" name="Telefono"
+                                placeholder="Teléfono (sin guiones)">
+                        </div>
+                        <div class="form-group">
+                            <label for="DNI">DNI</label>
+                            <input type="DNI" class="form-control" id="DNI" name="DNI" placeholder="DNI (sin puntos)">
+                        </div>
+                        <div class="form-group">
+                            <label for="Correo">Correo</label>
+                            <input type="Correo" class="form-control" id="Correo" name="Correo" placeholder="Correo">
+                        </div>
+                        <div class="form-group">
+                            <label for="Miembros">Miembros</label>
+                            <input type="Miembros" class="form-control" id="Miembros" name="Miembros"
+                                placeholder="Miembros (int)">
+                        </div>
+                        <div class="form-group">
+                            <label for="Acompañantes">Acompañantes</label>
+                            <input type="Acompañantes" class="form-control" id="Acompañantes" name="Acompañantes"
+                                placeholder="Acompañantes (int)">
+                        </div>
+                        <div class="form-group">
+                            <label for="Vegetariano">Vegetariano</label>
+                            <select class="form-control" id="Vegetariano" name="Vegetariano">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="NO">NINGUNO</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="Celiaco">Celiaco</label>
+                            <select class="form-control" id="Celiaco" name="Celiaco">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="NO">NINGUNO</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="Diabetico">Diabetico</label>
+                            <select class="form-control" id="Diabetico" name="Diabetico">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="NO">NINGUNO</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Guardar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Espera 3 segundos (3000 milisegundos) antes de iniciar la transición
+        setTimeout(function() {
+            const alertContainers = document.querySelectorAll('.alert');
+            alertContainers.forEach(container => {
+                container.classList.add('fade-out'); // Aplica la clase fade-out
+            });
+        }, 3000);
+    });
+</script>
+
+{% endblock %}

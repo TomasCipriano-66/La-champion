@@ -558,8 +558,6 @@ ul.btn li:last-child {
     position: relative;
 }
 
-
-
 .choose .titlepage {
     text-align: left;
     padding-bottom: 0;
@@ -1094,8 +1092,6 @@ ul.link li a::after {
     color: black;
 }
 
-
-
 /* Separator */
 .separator {
     width: 80%;
@@ -1117,12 +1113,10 @@ ul.link li a::after {
     }
 }
 
-
 .buttons_categories {
     margin-top: 40px;
     margin-bottom: 50px;
     text-align: center;
-
 }
 
 .buttons_categories button {
@@ -1150,8 +1144,7 @@ ul.link li a::after {
     font-weight: bold;
 }
 
-
-hr{
+hr {
     height: 3px;
     background-color: #979797;
     border-radius: 2px;
@@ -1162,7 +1155,7 @@ hr{
     flex-direction: row;
     align-items: flex-start;
     margin: 20px;
-    width: 2300px;            /* -------------arreglar esto----------*/
+    width: 2300px; /* -------------arreglar esto----------*/
 }
 
 .title_map {
@@ -1173,8 +1166,8 @@ hr{
     font-weight: bold;
 }
 
-.mapa{
-    margin-left: 100px; 
+.mapa {
+    margin-left: 100px;
     margin-top: 30px;
 }
 
@@ -1182,7 +1175,7 @@ hr{
     text-align: left;
     background: #fff;
     padding: 20px;
-    margin-left: 50px; 
+    margin-left: 50px;
     margin-top: 30px;
     border-radius: 20px;
     width: 800px;
@@ -1227,7 +1220,6 @@ hr{
     display: flex;
     flex-direction: column;
     margin-top: 1px; /* Ajusta el margen superior si es necesario */
-
 }
 
 .colegio {
@@ -1235,11 +1227,25 @@ hr{
     color: #525252;
 }
 
-
 .score {
     float: right;
-    font-size:35px;
+    font-size: 35px;
     font-weight: bold;
     color: #fd9729;
     margin-top: -75px;
+}
+
+.admin_bar {
+    border: 1px solid #ccc; /* Borde gris */
+    padding: 20px; /* Espaciado interno */
+    border-radius: 5px; /* Bordes redondeados */
+    background-color: #f9f9f9; /* Color de fondo */
+}
+.button-container {
+    display: flex;
+    flex-direction: row; /* Coloca los botones uno al lado del otro */
+}
+.checkbox-container {
+    display: flex;
+    flex-direction: column; /* Coloca los checkboxes uno debajo del otro */
 }
