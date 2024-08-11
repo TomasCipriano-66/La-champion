@@ -1,8 +1,7 @@
-from flask import Flask, render_template, request, redirect, url_for, jsonify,  flash
+from flask import Flask, render_template, request, redirect, url_for, jsonify
 from flask_mysqldb import MySQL
 
 app = Flask(__name__)
-app.secret_key = 'scuby'  # Necesaria para usar sesiones
 
 app.config['MYSQL_USER'] = 'u2jsmodvktmxthwk'
 app.config['MYSQL_PASSWORD'] = 'JTSZ6HR3AMgW3HDo7ykz'
@@ -21,10 +20,6 @@ def partidos():
 @app.route('/contacto')
 def contacto():
     return render_template('contact.html')
-
-@app.route('/inscripcion')
-def inscripcion():
-    return render_template('inscripcion.html')
 
 @app.route('/podio/<deporte>')
 def podio(deporte):
@@ -77,10 +72,6 @@ def add_team():
         Celiaco = request.form['Celiaco']
         Diabetico = request.form['Diabetico']
 
-        if not all([Equipo, Colegio, Deporte, Categoria, Telefono, DNI, Correo, Miembros, Acompañantes]):
-            flash('Por favor completa TODOS los campos.', 'danger')
-            return redirect(url_for('add_team'))
-
         cur = mysql.connection.cursor()
         cur.execute('INSERT INTO Inscripcion (Equipo, Colegio, Deporte, Categoria, Telefono, DNI, Correo, Miembros, Acompañantes, Vegetariano, Celiaco, Diabetico) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)',
                     (Equipo, Colegio, Deporte, Categoria, Telefono, DNI, Correo, Miembros, Acompañantes, Vegetariano, Celiaco, Diabetico))
@@ -119,10 +110,6 @@ def update_team(id):
         Vegetariano = request.form['Vegetariano']
         Celiaco = request.form['Celiaco']
         Diabetico = request.form['Diabetico']
-        
-        if not all([Equipo, Colegio, Deporte, Categoria, Telefono, DNI, Correo, Miembros, Acompañantes]):
-            flash('Por favor completa TODOS los campos.', 'danger')
-            return redirect(url_for('edit_team'))
         
         cur = mysql.connection.cursor()
         cur.execute("""
@@ -209,5 +196,6 @@ def add_pts(id):
         return redirect(url_for('admin'))
     
     
+
 if __name__ == '__main__':
     app.run(port=2500, debug=True)

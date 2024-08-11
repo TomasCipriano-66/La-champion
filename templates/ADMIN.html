@@ -9,8 +9,10 @@
     .switch {
         position: relative;
         display: inline-block;
-        width: 36px; /* Reducción al 60% de 60px */
-        height: 20px; /* Reducción al 60% de 34px */
+        width: 36px;
+        /* Reducción al 60% de 60px */
+        height: 20px;
+        /* Reducción al 60% de 34px */
     }
 
     /* Esconder el checkbox original */
@@ -30,33 +32,41 @@
         bottom: 0;
         background-color: #ccc;
         transition: .4s;
-        border-radius: 20px; /* Ajustado para mantener proporciones */
+        border-radius: 20px;
+        /* Ajustado para mantener proporciones */
     }
 
     .slider:before {
         position: absolute;
         content: "";
-        height: 16px; /* Reducción al 60% de 26px */
-        width: 16px; /* Reducción al 60% de 26px */
-        left: 2px; /* Ajustado para mantener proporciones */
-        bottom: 2px; /* Ajustado para mantener proporciones */
+        height: 16px;
+        /* Reducción al 60% de 26px */
+        width: 16px;
+        /* Reducción al 60% de 26px */
+        left: 2px;
+        /* Ajustado para mantener proporciones */
+        bottom: 2px;
+        /* Ajustado para mantener proporciones */
         background-color: white;
         transition: .4s;
         border-radius: 50%;
     }
 
-    input:checked + .slider {
+    input:checked+.slider {
         background-color: #4CAF50;
     }
 
-    input:checked + .slider:before {
-        transform: translateX(16px); /* Ajustado para el nuevo tamaño */
+    input:checked+.slider:before {
+        transform: translateX(16px);
+        /* Ajustado para el nuevo tamaño */
     }
 
     /* Estilo de las etiquetas */
     .slider-label {
-        margin-left: 8px; /* Ajustado para el nuevo tamaño */
-        font-size: 14px; /* Ajustado para el nuevo tamaño */
+        margin-left: 8px;
+        /* Ajustado para el nuevo tamaño */
+        font-size: 14px;
+        /* Ajustado para el nuevo tamaño */
         vertical-align: middle;
     }
 </style>
@@ -89,12 +99,16 @@
 </script>
 
 <div class="col-md-16" style="margin: 40px;">
-    <div class="admin_bar" style="border: 1px solid #ccc; padding: 20px; border-radius: 5px; display: flex; justify-content: space-between; align-items: flex-start;">
+    <div class="admin_bar"
+        style="border: 1px solid #ccc; padding: 20px; border-radius: 5px; display: flex; justify-content: space-between; align-items: flex-start;">
         <div class="button-container" style="display: flex; flex-direction: row; margin-bottom: 10px;">
-            <a href="{{ url_for('add_team') }}" class="btn btn-success" style="margin-right: 10px;">Agregar un equipo</a>
-            <a  class="btn btn-info">PDF</a>
+            <a href="{{ url_for('add_team') }}" class="btn btn-success" style="margin-right: 10px;">Agregar un
+                equipo</a>
+            <a class="btn btn-info"  style="margin-right: 10px;">DOWNLOAD</a>
+            <a class="btn btn-primary">STA</a>
+
         </div>
-        
+
         <div class="filter-container" style="display: flex; align-items: center;">
             <input type="text" placeholder="Filtrar..." class="form-control" style="width: 200px;">
         </div>
@@ -158,10 +172,9 @@
                 <td>{{inf.12}}</td>
                 <td>
 
-                    <a href="{{ url_for('cargar_team', id=inf[0]) }}" class="btn btn-success">OK</a>
+                    <a href="{{ url_for('cargar_team', id=inf[0]) }}" class="btn btn-success" onclick="return confirm('¿Estás seguro de que deseas confirmar este equipo?');">OK</a>
                     <a href="{{ url_for('get_team', id=inf[0]) }}" class="btn btn-secondary">Editar</a>
-                    <a href="{{ url_for('delete_team', id=inf[0]) }}" class="btn btn-danger btn-delete">ELIMINAR</a>
-
+                    <a href="{{ url_for('delete_team', id=inf[0]) }}" class="btn btn-danger btn-delete" onclick="return confirm('¿Estás seguro de que deseas eliminar este equipo?');">ELIMINAR</a>
                 </td>
             </tr>
             {% endfor %}
@@ -216,11 +229,6 @@
         </tbody>
     </table>
 </div>
-</div>
-
-
-</div>
-
 
 
 {% endblock %}
