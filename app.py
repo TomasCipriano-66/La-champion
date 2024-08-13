@@ -39,7 +39,7 @@ def podio(deporte):
 
 # --------------SECCION ADMINS----------------
 
-#cargar tabla1
+#cargar tablas
 @app.route('/ADMIN')
 def admin():
     cur = mysql.connection.cursor()
@@ -256,7 +256,45 @@ def eliminar_team(id):
     return redirect(url_for('admin'))
 
 
+#SECCION DE ESTADISTICAS DEL EVENTO
 
+@app.route('/estadisticas')
+def estadisticas():
+    cursor = mysql.connection.cursor()
+    
+    try:
+        # Obtener la cantidad de elementos en la primera lista
+        cursor.execute('SELECT COUNT(*) FROM Copa_renault')
+        cantidad_primera_lista = cursor.fetchone()[0]
+        
+        # Obtener la cantidad de elementos en la segunda lista
+        cursor.execute('SELECT COUNT(*) FROM Inscripcion')
+        cantidad_segunda_lista = cursor.fetchone()[0]
+        
+        # Obtener los nombres de las columnas en la tabla Copa_renault
+        cursor.execute('DESCRIBE Copa_renault')
+        columns = cursor.fetchall()
+        column_names = [col[0] for col in columns]
+
+        # Asegurarse de que hay al menos 9 columnas
+        if len(column_names) >= 9:
+            col8 = column_names[8]  # La columna 8 en base 0
+            col9 = column_names[9]  # La columna 9 en base 0
+            cursor.execute(f'SELECT SUM({col8}) + SUM({col9}) FROM Copa_renault')
+            suma_columnas = cursor.fetchone()[0]
+        else:
+            suma_columnas = None  # O algún valor predeterminado en caso de que no haya suficientes columnas
+
+        cursor.close()
+
+        # Pasar los datos a la plantilla HTML
+        return render_template('estadisticas.html', 
+            equipos_incriptos=cantidad_primera_lista, 
+            equipos_por_incribirse=cantidad_segunda_lista, 
+            total_de_personas=suma_columnas)
+    except Exception as e:
+        cursor.close()
+        return render_template('estadisticas.html', error=str(e))
 
 
 if __name__ == '__main__':
