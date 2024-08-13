@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Editar Equipo</title>
+    <title> ar Equipo</title>
 </head>
 
 <div class="container">
@@ -11,7 +11,17 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-body">
-                    <form id="teamForm" action="/update/{{team.0}}" method="POST">
+                    <!-- Botones en la parte superior del formulario -->
+                    <div class="d-flex justify-content-between mb-3">
+                        <a href="{{ url_for('admin') }}" class="btn btn-secondary">VOLVER</a>
+                        <form action="{{ url_for('eliminar_team', id=team[0]) }}" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este equipo?');">
+                            <button type="submit" class="btn btn-danger">ELIMINAR EQUIPO</button>
+                        </form>
+                        
+                    </div>
+
+                    <!-- Formulario -->
+                    <form id="teamForm" action="/config/{{ team.0 }}" method="POST">
                         <div class="form-group">
                             <label for="Equipo">Equipo</label>
                             <input type="text" class="form-control" id="Equipo" name="Equipo" placeholder="Equipo" value="{{ team.1 }}" required>
@@ -97,6 +107,7 @@
         </div>
     </div>
 </div>
+
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {

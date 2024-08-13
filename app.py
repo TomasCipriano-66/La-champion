@@ -196,6 +196,68 @@ def add_pts(id):
         return redirect(url_for('admin'))
     
     
+#trae la infomacion del equipo basado en el ID
+@app.route('/get_info/<string:id>')
+def get_team2(id):
+    cur = mysql.connection.cursor()
+    cur.execute('SELECT * FROM Copa_renault  WHERE id = %s', [id])
+    data = cur.fetchall()
+    cur.close()
+    return render_template('final-config.html', team = data[0])
+
+#envia la informacion al formulario de edicion
+@app.route('/config/<string:id>', methods=['POST'])
+def config_team(id):
+    if request.method == 'POST':
+        Equipo = request.form['Equipo']
+        Colegio = request.form['Colegio']
+        Deporte = request.form['Deporte']
+        Categoria = request.form['Categoria']
+        Telefono = request.form['Telefono']
+        DNI = request.form['DNI']
+        Correo = request.form['Correo']
+        Miembros = request.form['Miembros']
+        Acompañantes = request.form['Acompañantes']
+        Vegetariano = request.form['Vegetariano']
+        Celiaco = request.form['Celiaco']
+        Diabetico = request.form['Diabetico']
+        
+        cur = mysql.connection.cursor()
+        cur.execute("""
+            UPDATE Copa_renault 
+            SET Equipo = %s,
+                Colegio = %s,
+                Deporte = %s,
+                Categoria = %s,
+                Telefono = %s,
+                DNI = %s,
+                Correo = %s,
+                Miembros = %s,
+                Acompañantes = %s,
+                Vegetariano = %s,
+                Celiaco = %s,
+                Diabetico = %s
+            WHERE id = %s
+        """, (Equipo, Colegio, Deporte, Categoria, Telefono, DNI, Correo, Miembros, Acompañantes, Vegetariano, Celiaco, Diabetico, id))
+        mysql.connection.commit()
+        cur.close()
+        return redirect(url_for('admin'))
+    else:
+        # mostrar el formulario
+        return render_template('final-config.html')
+
+#eliminar un equipo de la DB
+@app.route('/delete/<string:id>', methods=['POST'])
+def eliminar_team(id):
+    cur = mysql.connection.cursor()
+    cur.execute('DELETE FROM Copa_renault WHERE id = %s', [id])
+    mysql.connection.commit()
+    cur.close()
+    return redirect(url_for('admin'))
+
+
+
+
 
 if __name__ == '__main__':
     app.run(port=2500, debug=True)

@@ -104,11 +104,9 @@
         <div class="button-container" style="display: flex; flex-direction: row; margin-bottom: 10px;">
             <a href="{{ url_for('add_team') }}" class="btn btn-success" style="margin-right: 10px;">Agregar un
                 equipo</a>
-            <a class="btn btn-info"  style="margin-right: 10px;">DOWNLOAD</a>
-            <a class="btn btn-primary">STA</a>
-
+            <a class="btn btn-info"  style="margin-right: 10px;">NOTIFICACION</a>
+            <a class="btn btn-primary">ESTADISTICA</a>
         </div>
-
         <div class="filter-container" style="display: flex; align-items: center;">
             <input type="text" placeholder="Filtrar..." class="form-control" style="width: 200px;">
         </div>
@@ -222,6 +220,7 @@
                 <td>
 
                     <a href="{{ url_for('add_pts', id=inf[0]) }}" class="btn btn-success">+PTS</a>
+                    <a class="btn btn-primary" style="width: 21%; padding: 8px;" href="{{ url_for('get_team2', id=inf[0]) }}"><img src="static/images/config.png" style="width: 100%;" /></a>
 
                 </td>
             </tr>
