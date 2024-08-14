@@ -874,6 +874,7 @@ ul.social_icon li a:hover {
 ul.location_icon {
     padding-top: 12px;
     text-align: left;
+    width: 50%;
 }
 
 ul.location_icon li {
@@ -1155,7 +1156,7 @@ hr {
     flex-direction: row;
     align-items: flex-start;
     margin: 20px;
-    width: 2300px; /* -------------arreglar esto----------*/
+    width: 100%; /* -------------arreglar esto----------*/
 }
 
 .title_map {
@@ -1212,9 +1213,6 @@ hr {
     background: #28a745;
 }
 
-.button:hover {
-    opacity: 0.8;
-}
 
 .grup {
     display: flex;

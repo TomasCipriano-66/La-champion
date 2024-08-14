@@ -3,67 +3,84 @@
 
 <style>
     .card-esp {
-    background: url('/static/images/textura.png') no-repeat center center;
-    background-size: cover;
-    border: 1px solid rgba(255, 255, 255, 0.2); /* Borde con opacidad */
-    border-radius: 12px; /* Bordes más redondeados */
-    padding: 20px;
-    margin: 20px;
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    height: 300px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Sombra más prominente */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    overflow: hidden; /* Asegura que el contenido no se desborde */
-    position: relative; /* Necesario para posicionar el pseudo-elemento */
-}
+        background: url('/static/images/textura2.jpg') no-repeat center center;
+        background-size: cover;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        /* Borde con opacidad */
+        border-radius: 12px;
+        /* Bordes más redondeados */
+        padding: 20px;
+        margin-left: 90px;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        height: 300px;
+        width: 60%;
+    }
 
-.card-esp::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.4); /* Capa de color negro semitransparente */
-    z-index: 1; /* Asegura que la capa esté por encima del fondo */
-}
+    .card-esp::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
 
-.card-esp:hover {
-    transform: translateY(-8px); /* Levanta más la tarjeta al pasar el cursor */
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
-}
+    .title {
+        font-size: 20px;
+        font-weight: bolder;
+        margin-bottom: 110px;
+        color: rgb(255, 255, 255);
+        z-index: 2;
+        /* Asegura que el texto esté sobre la capa de color */
+        position: relative;
+    }
 
-.title {
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 15px;
-    z-index: 2; /* Asegura que el texto esté sobre la capa de color */
-    position: relative;
-}
+    .button2 {
+        display: inline-block;
+        padding: 12px 24px;
+        text-align: center;
+        background-color: #ffc107;
+        /* Color amarillo */
+        color: white;
+        border: 5px dashed black;
+        /* Borde negro */
+        border-radius: 6px;
+        cursor: pointer;
+        /* Cambia el cursor a una mano cuando pasa por encima */
+        position: relative;
+        z-index: 2;
+    }
 
-.button {
-    display: inline-block;
-    padding: 12px 24px;
-    text-align: center;
-    background-color: #28a745; /* Color verde más vibrante */
-    color: white;
-    text-decoration: none;
-    border-radius: 6px;
-    font-size: 18px;
-    font-weight: bold;
-    transition: background-color 0.3s ease, transform 0.3s ease; /* Agrega transición para el color y el efecto de hover */
-    z-index: 2;
-    position: relative;
-}
+    
 
-.button:hover {
-    background-color: #218838; /* Color verde más oscuro al pasar el cursor */
-    transform: scale(1.05); /* Aumenta ligeramente el tamaño del botón */
-}
+    .social_icon {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        /* Quita los puntos de la lista */
+        display: flex;
+        /* Hace que los elementos hijos estén en una fila */
+        justify-content: center;
+        /* Centra los íconos horizontalmente */
+    }
+
+    .social_icon li {
+        margin: 0 10px;
+        /* Espaciado entre los íconos */
+    }
+
+    .social_icon li a {
+        text-decoration: none;
+        /* Quita el subrayado de los enlaces */
+        font-size: 24px;
+        /* Tamaño de los íconos */
+        color: #000;
+        /* Color de los íconos */
+    }
 
 </style>
 
@@ -159,10 +176,9 @@
         {% endblock %}
     </main>
 
-    <!--  footer -->
     <footer id="contact">
         <div class="footer">
-            <div class="container">
+            <div class="container-fluid"> <!-- Cambiar a container-fluid -->
                 <div class="row">
                     <div class="col-md-6">
                         <div class="titlepage">
@@ -170,69 +186,61 @@
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <form id="request" class="main_form" action="https://formsubmit.co/pepegamer@gmail.com"
-                            method="POST">
+                        <form id="request" class="main_form" action="https://formsubmit.co/pepegamer@gmail.com" method="POST">
                             <div class="row">
-                                <div class="col-md-4 ">
-                                    <input class="contactus" placeholder="Nombre" type="Nombre" name="Nombre">
+                                <div class="col-md-3">
+                                    <input class="contactus" placeholder="Nombre" type="text" name="Nombre">
                                 </div>
                                 <div class="col-md-4">
                                     <input class="contactus" placeholder="Email" type="email" name="Email">
                                 </div>
                                 <div class="col-md-3">
-                                    <input class="contactus" placeholder="Telefono" type="Telefono" name="Telefono">
+                                    <input class="contactus" placeholder="Telefono" type="text" name="Telefono">
                                 </div>
                                 <div class="col-md-8">
-                                    <textarea class="contactus1" placeholder="Mensaje" type="text"
-                                        name="Mensaje"></textarea>
+                                    <textarea class="contactus1" placeholder="Mensaje" name="Mensaje"></textarea>
                                 </div>
-                                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                                <div class="col-md-4">
                                     <button class="send_btn" type="submit">ENVIAR</button>
                                 </div>
-
                             </div>
                         </form>
                     </div>
-
+    
                     <div class="col-md-3 border_right">
-                        <div class="col-xl-1 col-lg-1 col-md-2 col-sm-12">
+                        <div class="col-xl-10 col-lg-10 col-md-11 col-sm-12" style="padding-bottom: 30px;">
                             <ul class="social_icon">
                                 <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                                 <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
                             </ul>
                         </div>
+    
                         <ul class="location_icon">
                             <li><a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i></a> Ubicacion</li>
-                            <li><a href="#"><i class="fa fa-volume-control-phone" aria-hidden="true"></i></a> +71
-                                9087654321
-                            </li>
-                            <li><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i></a>demo@gmail.com</li>
+                            <li><a href="#"><i class="fa fa-volume-control-phone" aria-hidden="true"></i></a> +71 9087654321</li>
+                            <li><a href="#"><i class="fa fa-envelope" aria-hidden="true"></i></a> demo@gmail.com</li>
                         </ul>
                     </div>
                     <div class="col-md-6 border_right">
-                        <ul class="location_icon">
-                            <div style="font-size: 22px; padding-left: 30px; padding-top: 40px;">Inscripciones para los equipos abiertas
-                                unete YA!!!</div>
-                            <a id="decorated-button" class="nav-link" style="font-size: 60px;"
-                                href="https://forms.gle/k2gPzaAFk5DJZ8Gh7">INSCRIBIRSE</a>
-                        </ul>
+                        <div style="font-size: 30px; padding-top: 40px;">Inscripciones para los equipos abiertas unete YA!!!</div>
+                        <a id="decorated-button" class="nav-link" style="font-size: 60px;" href="https://forms.gle/k2gPzaAFk5DJZ8Gh7">INSCRIBIRSE</a>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3 ">
                         <div class="card-esp">
-                            <div class="title">Participa del evento como espectador y apoya a tu equipo</div>
-                            <a href="#" class="button" aria-label="Formar parte del evento">Formar parte</a>
+                            <div class="title">Participa como espectador y apoya a tu equipo!</div>
+                            <a href="{{ url_for('form_espectadores') }}" class="nav-link button2">
+                                <p style="font-size: 20px; font-weight: bold;">Formar parte</p>
+                            </a>
                         </div>
                     </div>
-                    
                 </div>
             </div>
             <div class="copyright">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <p>Copyright 2019 All Right Reserved By <a href="https://html.design/"> Free html
-                                    Templates</a>
-                            </p>
+                            <p>Copyright 2019 All Right Reserved By <a href="https://html.design/">Free html Templates</a></p>
                         </div>
                     </div>
                 </div>

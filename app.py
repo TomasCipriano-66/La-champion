@@ -17,6 +17,10 @@ def home():
 def partidos():
     return render_template('partidos.html')
 
+@app.route('/form-espectadores')
+def form_espectadores():
+    return render_template('form-espectadores.html')
+
 @app.route('/contacto')
 def contacto():
     return render_template('contact.html')
