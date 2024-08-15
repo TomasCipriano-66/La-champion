@@ -871,6 +871,7 @@ ul.social_icon li a:hover {
 ul.location_icon {
     padding-top: 12px;
     text-align: left;
+    width: 50%;
 }
 
 ul.location_icon li {
@@ -1208,9 +1209,6 @@ hr {
     background: #28a745;
 }
 
-.button:hover {
-    opacity: 0.8;
-}
 
 .grup {
     display: flex;

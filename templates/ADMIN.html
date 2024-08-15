@@ -70,33 +70,7 @@
         vertical-align: middle;
     }
 </style>
-<script>
-    function toggleTable(checkbox, tableId) {
-        var table = document.getElementById(tableId);
-        if (checkbox.checked) {
-            table.style.display = 'block';
-        } else {
-            table.style.display = 'none';
-        }
-    }
 
-    function initTables() {
-        var checkbox1 = document.getElementById('checkbox1');
-        var checkbox2 = document.getElementById('checkbox2');
-
-        // Verificar si es la primera vez que se carga la página
-        if (localStorage.getItem('firstLoad') === null) {
-            checkbox1.checked = true; // Activar el checkbox solo la primera vez
-            checkbox1.checked = true;
-            localStorage.setItem('firstLoad', 'false'); // Marcar que ya no es la primera vez
-        }
-
-        toggleTable(checkbox1, 'table1');
-        toggleTable(checkbox2, 'table2');
-    }
-
-    window.onload = initTables;
-</script>
 
 <div class="col-md-16" style="margin: 40px;">
     <div class="admin_bar"
@@ -104,12 +78,34 @@
         <div class="button-container" style="display: flex; flex-direction: row; margin-bottom: 10px;">
             <a href="{{ url_for('add_team') }}" class="btn btn-success" style="margin-right: 10px;">Agregar un
                 equipo</a>
-            <a class="btn btn-info"  style="margin-right: 10px;">NOTIFICACION</a>
+            <a class="btn btn-info" style="margin-right: 10px;">NOTIFICACION</a>
             <a class="btn btn-primary" href="{{ url_for('estadisticas') }}">ESTADISTICAS</a>
         </div>
-        <div class="filter-container" style="display: flex; align-items: center;">
-            <input type="text" placeholder="Filtrar..." class="form-control" style="width: 200px;">
+        <div class="filter-container" style="display: flex; align-items: center; margin-bottom: 20px;">
+            <input type="text" id="searchInput" placeholder="Filtrar..." class="form-control" style="width: 160px;">
+            
+            <div class="dropdown" style="margin-left: 10px;width: 160px;">
+                <select id="categoriaFilter" class="form-control">
+                    <option value="">Todas las Categorías</option>
+                    <option value="Masculino mayor">Masculino mayor</option>
+                    <option value="Masculino menor">Masculino menor</option>
+                    <option value="Femenino mayor">Femenino mayor</option>
+                    <option value="Femenino menor">Femenino menor</option>
+                </select>
+            </div>
+
+            <div class="dropdown" style="margin-left: 10px;width: 160px;">
+                <select id="deporteFilter" class="form-control">
+                    <option value="">Todos los Deportes</option>
+                    <option value="Futbol">Futbol</option>
+                    <option value="Basquet">Basquet</option>
+                    <option value="Voley">Voley</option>
+                </select>
+            </div>
+
+            <button id="applyFiltersBtn" class="btn btn-primary" style="margin-left: 10px;">BUSCAR</button>
         </div>
+        
     </div>
 
     <div class="checkbox-container" style="margin-top: 10px; margin-left: 20px;">
@@ -170,9 +166,11 @@
                 <td>{{inf.12}}</td>
                 <td>
 
-                    <a href="{{ url_for('cargar_team', id=inf[0]) }}" class="btn btn-success" onclick="return confirm('¿Estás seguro de que deseas confirmar este equipo?');">OK</a>
+                    <a href="{{ url_for('cargar_team', id=inf[0]) }}" class="btn btn-success"
+                        onclick="return confirm('¿Estás seguro de que deseas confirmar este equipo?');">OK</a>
                     <a href="{{ url_for('get_team', id=inf[0]) }}" class="btn btn-secondary">Editar</a>
-                    <a href="{{ url_for('delete_team', id=inf[0]) }}" class="btn btn-danger btn-delete" onclick="return confirm('¿Estás seguro de que deseas eliminar este equipo?');">ELIMINAR</a>
+                    <a href="{{ url_for('delete_team', id=inf[0]) }}" class="btn btn-danger btn-delete"
+                        onclick="return confirm('¿Estás seguro de que deseas eliminar este equipo?');">ELIMINAR</a>
                 </td>
             </tr>
             {% endfor %}
@@ -220,7 +218,9 @@
                 <td>
 
                     <a href="{{ url_for('add_pts', id=inf[0]) }}" class="btn btn-success">+PTS</a>
-                    <a class="btn btn-primary" style="width: 21%; padding: 8px;" href="{{ url_for('get_team2', id=inf[0]) }}"><img src="static/images/config.png" style="width: 100%;" /></a>
+                    <a class="btn btn-primary" style="width: 21%; padding: 8px;"
+                        href="{{ url_for('get_team2', id=inf[0]) }}"><img src="static/images/config.png"
+                            style="width: 100%;" /></a>
 
                 </td>
             </tr>
@@ -229,5 +229,87 @@
     </table>
 </div>
 
+<script>
+    function toggleTable(checkbox, tableId) {
+        var table = document.getElementById(tableId);
+        if (checkbox.checked) {
+            table.style.display = 'block';
+        } else {
+            table.style.display = 'none';
+        }
+    }
+
+    function initTables() {
+        var checkbox1 = document.getElementById('checkbox1');
+        var checkbox2 = document.getElementById('checkbox2');
+
+        // Verificar si es la primera vez que se carga la página
+        if (localStorage.getItem('firstLoad') === null) {
+            checkbox1.checked = true; // Activar el checkbox solo la primera vez
+            checkbox1.checked = true;
+            localStorage.setItem('firstLoad', 'false'); // Marcar que ya no es la primera vez
+        }
+
+        toggleTable(checkbox1, 'table1');
+        toggleTable(checkbox2, 'table2');
+    }
+
+    window.onload = initTables;
+
+
+
+    function filterTables() {
+            const searchInput = document.getElementById('searchInput').value.toLowerCase();
+            const categoriaFilter = document.getElementById('categoriaFilter').value.toLowerCase();
+            const deporteFilter = document.getElementById('deporteFilter').value.toLowerCase();
+
+            // Filtrar la tabla 1
+            const table1Rows = document.querySelectorAll('#table1 tbody tr');
+            table1Rows.forEach(row => {
+                const equipo = row.cells[0].textContent.toLowerCase();
+                const colegio = row.cells[1].textContent.toLowerCase();
+                const categoria = row.cells[3].textContent.toLowerCase();
+                const deporte = row.cells[2].textContent.toLowerCase();
+
+                const matchesSearch = equipo.includes(searchInput) || colegio.includes(searchInput);
+                const matchesCategoria = categoriaFilter === "" || categoria === categoriaFilter;
+                const matchesDeporte = deporteFilter === "" || deporte === deporteFilter;
+
+                if (matchesSearch && matchesCategoria && matchesDeporte) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+
+            // Filtrar la tabla 2
+            const table2Rows = document.querySelectorAll('#table2 tbody tr');
+            table2Rows.forEach(row => {
+                const equipo = row.cells[0].textContent.toLowerCase();
+                const colegio = row.cells[1].textContent.toLowerCase();
+                const categoria = row.cells[3].textContent.toLowerCase();
+                const deporte = row.cells[2].textContent.toLowerCase();
+
+                const matchesSearch = equipo.includes(searchInput) || colegio.includes(searchInput);
+                const matchesCategoria = categoriaFilter === "" || categoria === categoriaFilter;
+                const matchesDeporte = deporteFilter === "" || deporte === deporteFilter;
+
+                if (matchesSearch && matchesCategoria && matchesDeporte) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+
+            // Reiniciar las opciones de los filtros
+            document.getElementById('categoriaFilter').value = '';
+            document.getElementById('deporteFilter').value = '';
+            document.getElementById('searchInput').value = '';
+        }
+
+        document.getElementById('applyFiltersBtn').addEventListener('click', filterTables);
+
+        window.onload = initTables;
+</script>
 
 {% endblock %}
